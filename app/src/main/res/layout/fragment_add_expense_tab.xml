@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.addTransaction.addExpense.AddExpenseFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/add_expense_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameExpenseParent"
+                style="@style/PrimaryEditText"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:hint="@string/text_title">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameExpense"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descriptionExpenseParent"
+                style="@style/PrimaryEditText"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:hint="@string/text_description">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/descriptionExpense"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/amountExpenseParent"
+                style="@style/PrimaryEditText"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:hint="@string/text_expense_amount">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amountExpense"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/datePickerParent"
+                style="@style/PrimaryEditText"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:hint="@string/text_date">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/datePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:inputType="none"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/categoryPickerParent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:hint="@string/text_category"
+                app:boxCornerRadiusTopEnd="5dp"
+                app:boxCornerRadiusTopStart="5dp"
+                app:boxBackgroundColor="@color/surface">
+
+                <AutoCompleteTextView
+                    android:id="@+id/categoryPicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/typePickerParent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:hint="@string/text_expense_transaction_type"
+                app:boxCornerRadiusTopEnd="5dp"
+                app:boxCornerRadiusTopStart="5dp"
+                app:boxBackgroundColor="@color/surface">
+
+                <AutoCompleteTextView
+                    android:id="@+id/typePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/add_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:padding="8dp"
+                android:text="@string/text_add_expense"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

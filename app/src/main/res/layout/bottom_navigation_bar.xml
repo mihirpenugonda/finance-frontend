@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="#70CAD1">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom"
+        app:backgroundTint="@color/surface"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemRippleColor="@color/transparent"
+        app:menu="@menu/bottom_nav_menu"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="630dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_expense_button"
+        style="@style/PrimaryFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32.5dp"
+        app:borderWidth="5dp"
+        app:elevation="15dp"
+        app:layout_anchor="@+id/bottomMenu"
+        app:layout_anchorGravity="top|center"
+        app:fabCustomSize="45dp"
+        app:srcCompat="@drawable/ic_expenses" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

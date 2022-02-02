@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
+
+
+    <com.developer.finance.presentation.addTransaction.components.DropdownEditText
+        android:id="@+id/usd_searchView"
+        style="@style/PrimaryEditText"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:fontFamily="@font/open_sans_regular"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/blue_500"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:hint="add friends"
+        android:minHeight="50dp"
+        android:paddingVertical="0dp"
+        android:paddingLeft="10dp" />
+
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/usd_chipGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usd_searchView"
+        android:layout_marginHorizontal="13dp"
+        android:layout_marginTop="-5dp"
+        app:chipSpacing="0dp"
+        app:chipSpacingVertical="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</RelativeLayout>

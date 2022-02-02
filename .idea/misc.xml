@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.34037424723307297" />
+        <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/ic_expenses.xml" value="0.278" />
+        <entry key="app/src/main/res/drawable/ic_income.xml" value="0.1595" />
+        <entry key="app/src/main/res/font/open_sans_regular.xml" value="0.2859375" />
+        <entry key="app/src/main/res/font/open_sans_semibold.xml" value="0.2859375" />
+        <entry key="app/src/main/res/layout/activity_add_transaction.xml" value="0.13652482269503546" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/add_expense_category_dropdown_item.xml" value="0.13652482269503546" />
+        <entry key="app/src/main/res/layout/add_expense_split_fragment.xml" value="0.2416333902568717" />
+        <entry key="app/src/main/res/layout/bottom_navigation_bar.xml" value="0.17543859649122806" />
+        <entry key="app/src/main/res/layout/card_expense.xml" value="0.2504528985507246" />
+        <entry key="app/src/main/res/layout/card_income.xml" value="0.23641304347826086" />
+        <entry key="app/src/main/res/layout/card_total_balance.xml" value="0.2504528985507246" />
+        <entry key="app/src/main/res/layout/expense_card.xml" value="0.23641304347826086" />
+        <entry key="app/src/main/res/layout/fragment_add_expense.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_add_expense_dialog.xml" value="0.30257415771484397" />
+        <entry key="app/src/main/res/layout/fragment_add_expense_tab.xml" value="0.38084106445312504" />
+        <entry key="app/src/main/res/layout/fragment_add_splits.xml" value="0.23617401123046877" />
+        <entry key="app/src/main/res/layout/fragment_add_splits_tab.xml" value="0.23641304347826086" />
+        <entry key="app/src/main/res/layout/fragment_expenses.xml" value="0.43074324324324326" />
+        <entry key="app/src/main/res/layout/fragment_friends.xml" value="0.2141473010577987" />
+        <entry key="app/src/main/res/layout/fragment_group.xml" value="0.19248352050781253" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.17741866431678066" />
+        <entry key="app/src/main/res/layout/income_card.xml" value="0.411155559999723" />
+        <entry key="app/src/main/res/layout/toal_balance.xml" value="0.23641304347826086" />
+        <entry key="app/src/main/res/layout/user_search_dialog.xml" value="0.30377668015500336" />
+        <entry key="app/src/main/res/layout/user_search_dialog_rvitem.xml" value="0.3216483706519717" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.28072916666666664" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
