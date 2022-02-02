@@ -23,11 +23,12 @@
         <entry key="app/src/main/res/layout/fragment_add_expense_tab.xml" value="0.38084106445312504" />
         <entry key="app/src/main/res/layout/fragment_add_splits.xml" value="0.23617401123046877" />
         <entry key="app/src/main/res/layout/fragment_add_splits_tab.xml" value="0.23641304347826086" />
-        <entry key="app/src/main/res/layout/fragment_expenses.xml" value="0.43074324324324326" />
+        <entry key="app/src/main/res/layout/fragment_expenses.xml" value="0.28053204353083433" />
         <entry key="app/src/main/res/layout/fragment_friends.xml" value="0.2141473010577987" />
         <entry key="app/src/main/res/layout/fragment_group.xml" value="0.19248352050781253" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.17741866431678066" />
         <entry key="app/src/main/res/layout/income_card.xml" value="0.411155559999723" />
+        <entry key="app/src/main/res/layout/rv_expense_item.xml" value="0.6319732666015625" />
         <entry key="app/src/main/res/layout/toal_balance.xml" value="0.23641304347826086" />
         <entry key="app/src/main/res/layout/user_search_dialog.xml" value="0.30377668015500336" />
         <entry key="app/src/main/res/layout/user_search_dialog_rvitem.xml" value="0.3216483706519717" />

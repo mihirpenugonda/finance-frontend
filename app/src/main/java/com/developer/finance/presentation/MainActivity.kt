@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
         expensesViewModel
 
         val navController = findNavController(R.id.fragment)

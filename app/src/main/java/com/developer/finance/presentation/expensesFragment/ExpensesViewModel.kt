@@ -31,7 +31,6 @@ class ExpensesViewModel @Inject constructor(
             if (result.isNullOrEmpty()) {
                 _state.value = ExpensesFragmentEvent.Empty
             } else {
-                Log.d("SUCCESS", result.toString())
                 _state.value = ExpensesFragmentEvent.Success(result)
             }
         }.launchIn(viewModelScope)

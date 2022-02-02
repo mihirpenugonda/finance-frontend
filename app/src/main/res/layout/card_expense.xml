@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/total_expense_card_view"
     style="@style/PrimaryCardView"
     android:layout_width="match_parent"
     android:layout_height="140dp"

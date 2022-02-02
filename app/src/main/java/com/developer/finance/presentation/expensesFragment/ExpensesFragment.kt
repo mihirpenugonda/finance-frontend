@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.developer.finance.R
 import com.developer.finance.common.base.BaseFragment
 import com.developer.finance.data.local.entity.Expense
@@ -23,12 +24,18 @@ import kotlinx.coroutines.flow.collect
 class ExpensesFragment : BaseFragment<FragmentExpensesBinding, ExpensesViewModel>() {
 
     override val viewModel: ExpensesViewModel by activityViewModels<ExpensesViewModel>()
+    private val adapter by lazy {
+        ExpensesAdapter()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         launchExpenseListener()
         launchFilterListener()
+        initRv()
+
+
     }
 
     private fun initViews() {
@@ -53,14 +60,17 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding, ExpensesViewModel
                     0 -> {
                         viewModel.setOverall()
                         binding.typeSelectorText.text = getString(R.string.text_all_transactions)
+                        overallMode()
                     }
                     1 -> {
                         viewModel.setIncome()
-                        binding.typeSelectorText.text = getString(R.string.text_income)
+                        binding.typeSelectorText.text = getString(R.string.text_all_income)
+                        incomeMode()
                     }
                     2 -> {
                         viewModel.setExpense()
-                        binding.typeSelectorText.text = getString(R.string.text_expense)
+                        binding.typeSelectorText.text = getString(R.string.text_all_expenses)
+                        expenseMode()
                     }
                 }
             }
@@ -99,11 +109,22 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding, ExpensesViewModel
                     is ExpensesFragmentEvent.Success -> {
                         Log.d("Updated", event.expenses.size.toString())
                         calculateTotalIncomeExpense(event.expenses)
+                        updateRv(event.expenses)
                     }
                     else -> {}
                 }
             }
         }
+
+    private fun initRv() {
+        val layoutManager: LinearLayoutManager = LinearLayoutManager(requireContext())
+        binding.expensesRecyclerView.adapter = adapter
+        binding.expensesRecyclerView.layoutManager = layoutManager
+    }
+
+    private fun updateRv(newExpenses: List<Expense>) {
+        adapter.setData(newExpenses)
+    }
 
     @SuppressLint("SetTextI18n")
     private fun calculateTotalIncomeExpense(expenses: List<Expense>) {
@@ -113,15 +134,46 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding, ExpensesViewModel
 
         var balance = income - expense
 
-        binding.totalBalanceCardView.textTotalBalanceAmount.text = if(balance < 0) {
-            balance *= -1
-            "-₹$balance"
+        binding.totalBalanceCardView.textTotalBalanceAmount.text = if (balance < 0) {
+            balance *= -1; "-₹$balance"
         } else "+₹$balance"
-        binding.totalIncomeCardView.textTotalIncomeAmount.text = "+₹$income"
-        binding.totalExpenseCardView.textTotalExpenseAmount.text = "-₹$expense"
-
+        binding.totalIncomeCardView.textTotalIncomeAmount.text =
+            if (viewModel.transactionFilter.value == "expense") {
+                "0"
+            } else {
+                "+₹$income"
+            }
+        binding.totalExpenseCardView.textTotalExpenseAmount.text =
+            if (viewModel.transactionFilter.value == "income") {
+                "0"
+            } else {
+                "-₹$expense"
+            }
     }
 
+    private fun overallMode() = with(binding) {
+        totalBalanceCardView.totalBalanceCardView.animate().alpha(1f)
+        totalIncomeCardView.totalIncomeCardView.visibility = View.VISIBLE
+        totalBalanceCardView.totalBalanceCardView.visibility = View.VISIBLE
+        totalExpenseCardView.totalExpenseCardView.visibility = View.VISIBLE
+        expenseIncomeLayoutSpacer.visibility = View.VISIBLE
+    }
+
+    private fun expenseMode() = with(binding) {
+        totalBalanceCardView.totalBalanceCardView.animate().alpha(0.0f)
+        totalIncomeCardView.totalIncomeCardView.visibility = View.GONE
+        totalBalanceCardView.totalBalanceCardView.visibility = View.GONE
+        totalExpenseCardView.totalExpenseCardView.visibility = View.VISIBLE
+        expenseIncomeLayoutSpacer.visibility = View.GONE
+    }
+
+    private fun incomeMode() = with(binding) {
+        totalBalanceCardView.totalBalanceCardView.animate().alpha(0.0f)
+        totalExpenseCardView.totalExpenseCardView.visibility = View.GONE
+        totalBalanceCardView.totalBalanceCardView.visibility = View.GONE
+        totalIncomeCardView.totalIncomeCardView.visibility = View.VISIBLE
+        expenseIncomeLayoutSpacer.visibility = View.GONE
+    }
 
     override fun getViewBinding(
         inflater: LayoutInflater,

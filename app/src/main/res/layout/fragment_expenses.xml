@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:orientation="vertical"
     android:scrollbars="none">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/expenses_fragment_scroll_view"
         android:layout_width="match_parent"
+        android:animateLayoutChanges="true"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,9 +26,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
                 android:fontFamily="@font/open_sans_regular"
-                android:text="@string/text_expenses"
+                android:text="@string/text_expense"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -36,11 +38,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/open_sans_bold"
-                android:padding="5dp"
+                android:background="@color/surface"
+                android:fontFamily="@font/open_sans_regular"
+                android:padding="10dp"
                 android:text="@string/text_add_expenses"
+                android:textAllCaps="false"
+                app:circularflow_radiusInDP="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,6 +71,7 @@
                 android:paddingHorizontal="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/total_balance_card_view">
 
                 <include
@@ -73,28 +79,24 @@
                     layout="@layout/card_income"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     tools:layout_editor_absoluteX="11dp"
                     tools:layout_editor_absoluteY="215dp" />
+
+                <Space
+                    android:id="@+id/expense_income_layout_spacer"
+                    android:layout_width="16dp"
+                    android:layout_height="match_parent" />
 
                 <include
                     android:id="@+id/total_expense_card_view"
                     layout="@layout/card_expense"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
-                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     tools:layout_editor_absoluteX="11dp"
                     tools:layout_editor_absoluteY="215dp" />
             </LinearLayout>
-
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginHorizontal="16dp"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/expense_income_layout" />-->
 
             <TextView
                 android:id="@+id/type_selector_text"
@@ -115,6 +117,18 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/expense_income_layout" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/expenses_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/type_selector_text"
+                tools:listitem="@layout/rv_expense_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

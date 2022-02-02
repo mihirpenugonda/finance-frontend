@@ -102,7 +102,8 @@
                     android:id="@+id/categoryPicker"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -122,7 +123,8 @@
                     android:id="@+id/typePicker"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -132,8 +134,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/open_sans_bold"
-                android:padding="8dp"
+                android:background="@color/surface"
+                android:fontFamily="@font/open_sans_regular"
+                android:padding="10dp"
+                android:textAllCaps="false"
                 android:text="@string/text_add_expense"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

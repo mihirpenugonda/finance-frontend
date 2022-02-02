@@ -2,6 +2,7 @@ package com.developer.finance.presentation.addTransaction
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.developer.finance.R
 import com.developer.finance.databinding.ActivityAddTransactionBinding
 import com.developer.finance.presentation.addTransaction.addExpense.AddExpenseFragment
 import com.developer.finance.presentation.addTransaction.addSplits.AddSplitsFragment
@@ -15,6 +16,8 @@ class AddTransactionActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
         binding = ActivityAddTransactionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -22,7 +25,7 @@ class AddTransactionActivity: AppCompatActivity() {
             finish()
         }
 
-        var tabViewPager = AddTransactionViewPagerAdapter(supportFragmentManager, lifecycle)
+        val tabViewPager = AddTransactionViewPagerAdapter(supportFragmentManager, lifecycle)
         tabViewPager.addFragment(AddExpenseFragment(), "add expense")
         tabViewPager.addFragment(AddSplitsFragment(), "add split")
         binding.selectTypeViewPager.adapter = tabViewPager

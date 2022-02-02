@@ -26,7 +26,7 @@
     <string name="text_description">description</string>
     <string name="text_date">date</string>
     <string name="text_category">category</string>
-    <string name="text_income">income</string>
+    <string name="text_all_income">all income</string>
     <string name="text_expense">expense</string>
 
     <!--  Share -->
@@ -57,7 +57,7 @@
     <string name="text_error_occurred">Error occurred!</string>
     <string name="text_add_split">add split</string>
     <string name="text_add_expenses">add expenses</string>
-    <string name="text_expenses">expenses</string>
+    <string name="text_all_expenses">all expenses</string>
     <string name="text_all_transactions">all transactions</string>
 
     <string-array name="types">

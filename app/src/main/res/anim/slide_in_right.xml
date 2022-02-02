@@ -3,9 +3,9 @@
     android:shareInterpolator="false" >
 
     <translate
-        android:duration="100"
-        android:fromYDelta="100%"
-        android:toYDelta="0%" />
+        android:duration="@integer/material_motion_duration_long_2"
+        android:fromXDelta="100%"
+        android:toXDelta="0%" />
 
 
 </set>
