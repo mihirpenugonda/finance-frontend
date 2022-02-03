@@ -3,27 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/fragment_expenses">
+    app:startDestination="@id/fragment_friends">
     <fragment
         android:id="@+id/fragment_friends"
         android:name="com.developer.finance.presentation.friendsFragment.FriendsFragment"
         android:label="FriendsFragment"
         tools:layout="@layout/fragment_friends" />
     <fragment
-        android:id="@+id/fragment_groups"
-        android:name="com.developer.finance.presentation.groupFragment.GroupFragment"
-        android:label="GroupFragment"
-        tools:layout="@layout/fragment_group" />
-    <fragment
         android:id="@+id/fragment_expenses"
         android:name="com.developer.finance.presentation.expensesFragment.ExpensesFragment"
         android:label="ExpensesFragment"
-        tools:layout="@layout/fragment_expenses" />
-    <fragment
-        android:id="@+id/fragment_settings"
-        android:name="com.developer.finance.presentation.settingsFragment.SettingsFragment"
-        android:label="SettingsFragment"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_expenses" >
+    </fragment>
     <activity
         android:id="@+id/add_transaction_activity"
         android:name="com.developer.finance.presentation.addTransaction.AddTransactionActivity"

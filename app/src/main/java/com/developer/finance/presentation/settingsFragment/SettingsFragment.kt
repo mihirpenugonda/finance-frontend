@@ -15,8 +15,8 @@ import com.developer.finance.databinding.FragmentSettingsBinding
 import kotlinx.coroutines.launch
 import kotlin.math.log
 
-class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
-    override val viewModel: SettingsViewModel by activityViewModels<SettingsViewModel>()
+class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
+    val viewModel: SettingsViewModel by activityViewModels<SettingsViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)

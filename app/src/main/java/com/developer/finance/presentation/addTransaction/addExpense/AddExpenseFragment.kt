@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.children
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,13 +17,14 @@ import com.developer.finance.data.local.entity.Expense
 import com.developer.finance.databinding.FragmentAddExpenseTabBinding
 import com.developer.finance.presentation.addTransaction.AddTransactionViewModel
 import com.developer.finance.presentation.addTransaction.components.DatePickerText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AddExpenseFragment : BaseFragment<FragmentAddExpenseTabBinding, AddTransactionViewModel>() {
-    override val viewModel: AddTransactionViewModel by activityViewModels<AddTransactionViewModel>()
+class AddExpenseFragment : BaseFragment<FragmentAddExpenseTabBinding>() {
+    val viewModel: AddTransactionViewModel by activityViewModels<AddTransactionViewModel>()
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -67,23 +69,20 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseTabBinding, AddTransac
         )
         binding.typePicker.setAdapter(typeAdapter)
 
-        binding.nameExpense.doOnTextChanged { _, _, _, _ ->
-            binding.nameExpenseParent.isErrorEnabled = false
-        }
-        binding.descriptionExpense.doOnTextChanged { _, _, _, _ ->
-            binding.descriptionExpenseParent.isErrorEnabled = false
-        }
-        binding.amountExpense.doOnTextChanged { _, _, _, _ ->
-            binding.amountExpenseParent.isErrorEnabled = false
-        }
-        binding.datePicker.doOnTextChanged { _, _, _, _ ->
-            binding.datePickerParent.isErrorEnabled = false
-        }
-        binding.categoryPicker.doOnTextChanged { _, _, _, _ ->
-            binding.categoryPickerParent.isErrorEnabled = false
-        }
-        binding.typePicker.doOnTextChanged { _, _, _, _ ->
-            binding.typePickerParent.isErrorEnabled = false
+        val listOfElements = listOf(
+            binding.nameExpense,
+            binding.descriptionExpense,
+            binding.amountExpense,
+            binding.datePicker,
+            binding.categoryPicker,
+            binding.typePicker
+        )
+
+        listOfElements.forEach {
+            it.doOnTextChanged { _, _, _, _ ->
+                val layout = it.parent.parent as TextInputLayout
+                layout.isErrorEnabled = false
+            }
         }
     }
 
@@ -137,12 +136,7 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseTabBinding, AddTransac
             binding.typePickerParent.error = "type cant be empty"
             isValidated = false
         }
-
-        return if (isValidated) {
-            newExpense
-        } else {
-            null
-        }
+        return if (isValidated) { newExpense } else { null }
     }
 
 }

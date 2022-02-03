@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.expensesFragment
+package com.developer.finance.presentation.expensesFragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -92,10 +92,18 @@ class ExpensesAdapter : RecyclerView.Adapter<ExpensesAdapter.ExpenseViewHolder>(
                 }
             }
         }
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let {it(expense)}
+        }
     }
 
     override fun getItemCount(): Int {
         return oldExpenseList.size
+    }
+
+    private var onItemClickListener: ((Expense) -> Unit)? = null
+    fun setOnItemClickListener(listener: (Expense) -> Unit) {
+        onItemClickListener = listener
     }
 
     fun setData(newExpenseList: List<Expense>) {
@@ -104,5 +112,4 @@ class ExpensesAdapter : RecyclerView.Adapter<ExpensesAdapter.ExpenseViewHolder>(
         oldExpenseList = newExpenseList
         diffResults.dispatchUpdatesTo(this)
     }
-
 }

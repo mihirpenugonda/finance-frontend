@@ -3,6 +3,7 @@ package com.developer.finance.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
 data class Expense(
@@ -16,6 +17,6 @@ data class Expense(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "e_id")
     var id: Int = 0,
-)  {
+) : Serializable {
 
 }

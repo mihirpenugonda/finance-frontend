@@ -18,12 +18,13 @@ import com.developer.finance.R
 import com.developer.finance.common.base.BaseFragment
 import com.developer.finance.data.local.entity.Expense
 import com.developer.finance.databinding.FragmentExpensesBinding
+import com.developer.finance.presentation.expensesFragment.adapter.ExpensesAdapter
 import kotlinx.coroutines.flow.collect
 
 
-class ExpensesFragment : BaseFragment<FragmentExpensesBinding, ExpensesViewModel>() {
+class ExpensesFragment : BaseFragment<FragmentExpensesBinding>() {
 
-    override val viewModel: ExpensesViewModel by activityViewModels<ExpensesViewModel>()
+    val viewModel: ExpensesViewModel by activityViewModels<ExpensesViewModel>()
     private val adapter by lazy {
         ExpensesAdapter()
     }
@@ -40,6 +41,7 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding, ExpensesViewModel
         binding.addExpenseButton.setOnClickListener {
             findNavController().navigate(R.id.add_transaction_activity)
         }
+
         val typeAdapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.types,
@@ -76,6 +78,9 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding, ExpensesViewModel
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 viewModel.setOverall()
             }
+        }
+
+        adapter.setOnItemClickListener {
         }
     }
 
@@ -176,12 +181,12 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding, ExpensesViewModel
 
     private fun emptyMode() = with(binding) {
         expensesFragmentScrollView.visibility = View.GONE
-        expensesFragmentEmptyLayout.emptyStateLayout.visibility = View.VISIBLE
+        expensesFragmentEmptyLayout.visibility = View.VISIBLE
     }
 
     private fun displayMode() = with(binding) {
         expensesFragmentScrollView.visibility = View.VISIBLE
-        expensesFragmentEmptyLayout.emptyStateLayout.visibility = View.GONE
+        expensesFragmentEmptyLayout.visibility = View.GONE
     }
 
 

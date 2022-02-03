@@ -7,8 +7,8 @@ import com.developer.finance.common.base.BaseFragment
 import com.developer.finance.databinding.FragmentAddSplitsTabBinding
 import com.developer.finance.presentation.addTransaction.AddTransactionViewModel
 
-class AddSplitsFragment : BaseFragment<FragmentAddSplitsTabBinding, AddTransactionViewModel>() {
-    override val viewModel: AddTransactionViewModel by activityViewModels<AddTransactionViewModel>()
+class AddSplitsFragment : BaseFragment<FragmentAddSplitsTabBinding>() {
+    val viewModel: AddTransactionViewModel by activityViewModels<AddTransactionViewModel>()
 
     override fun getViewBinding(
         inflater: LayoutInflater,

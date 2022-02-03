@@ -16,11 +16,10 @@ import com.developer.finance.data.local.entity.Expense
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
+abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     private var _binding: VB? = null
     protected val binding get() = _binding!!
-    protected abstract val viewModel: VM
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

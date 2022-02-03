@@ -39,10 +39,10 @@ class MainActivity : AppCompatActivity() {
         expensesViewModel
 
         val navController = findNavController(R.id.fragment)
-        binding.bottomNavigationView.addExpenseButton.setOnClickListener {
-            navController.navigate(R.id.add_transaction_activity)
-        }
-        binding.bottomNavigationView.bottomMenu.setupWithNavController(navController)
+//        binding.bottomNavigationView.addExpenseButton.setOnClickListener {
+//            navController.navigate(R.id.add_transaction_activity)
+//        }
+        binding.bottomNavigationView.setupWithNavController(navController)
 
         observeThemeMode()
     }

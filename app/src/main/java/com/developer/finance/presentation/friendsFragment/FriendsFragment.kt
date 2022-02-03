@@ -12,9 +12,9 @@ import com.developer.finance.R
 import com.developer.finance.common.base.BaseFragment
 import com.developer.finance.databinding.FragmentFriendsBinding
 
-class FriendsFragment : BaseFragment<FragmentFriendsBinding, FriendsViewModel>() {
+class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
 
-    override val viewModel: FriendsViewModel by activityViewModels<FriendsViewModel>()
+    val viewModel: FriendsViewModel by activityViewModels<FriendsViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

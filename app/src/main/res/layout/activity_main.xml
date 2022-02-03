@@ -12,21 +12,22 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav" />
 
-    <include
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
-        layout="@layout/bottom_navigation_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:layout_marginBottom="0dp"
-        android:elevation="0dp" />
+        app:backgroundTint="@color/surface"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:itemRippleColor="@color/transparent"
+        app:menu="@menu/bottom_nav_menu" />
 
 
 </RelativeLayout>

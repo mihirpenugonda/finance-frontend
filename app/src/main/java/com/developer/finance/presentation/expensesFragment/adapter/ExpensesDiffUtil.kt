@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.expensesFragment
+package com.developer.finance.presentation.expensesFragment.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.developer.finance.data.local.entity.Expense
