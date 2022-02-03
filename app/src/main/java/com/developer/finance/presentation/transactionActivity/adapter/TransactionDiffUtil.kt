@@ -3,7 +3,7 @@ package com.developer.finance.presentation.expensesFragment.adapter
 import androidx.recyclerview.widget.DiffUtil
 import com.developer.finance.data.local.entity.Expense
 
-class ExpensesDiffUtil(
+class TransactionDiffUtil(
     private val oldList: List<Expense>,
     private val newList: List<Expense>
 ) : DiffUtil.Callback() {

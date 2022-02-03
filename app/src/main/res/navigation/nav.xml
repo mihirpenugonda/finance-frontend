@@ -14,9 +14,17 @@
         android:name="com.developer.finance.presentation.expensesFragment.ExpensesFragment"
         android:label="ExpensesFragment"
         tools:layout="@layout/fragment_expenses" >
+        <action
+            android:id="@+id/action_fragment_expenses_to_transactionActivity"
+            app:destination="@id/transactionActivity" />
     </fragment>
     <activity
         android:id="@+id/add_transaction_activity"
         android:name="com.developer.finance.presentation.addTransaction.AddTransactionActivity"
         android:label="AddTransactionActivity" />
+    <activity
+        android:id="@+id/transactionActivity"
+        android:name="com.developer.finance.presentation.transactionActivity.TransactionActivity"
+        android:label="activity_transaction"
+        tools:layout="@layout/activity_transaction" />
 </navigation>

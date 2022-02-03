@@ -1,6 +1,5 @@
 package com.developer.finance.presentation.expensesFragment
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.developer.finance.domain.repository.ExpenseRepository

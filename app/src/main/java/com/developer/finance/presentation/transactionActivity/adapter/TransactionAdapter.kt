@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.expensesFragment.adapter
+package com.developer.finance.presentation.transactionActivity.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,18 +8,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.developer.finance.R
 import com.developer.finance.data.local.entity.Expense
 import com.developer.finance.databinding.RvExpenseItemBinding
+import com.developer.finance.presentation.expensesFragment.adapter.TransactionDiffUtil
 
-class ExpensesAdapter : RecyclerView.Adapter<ExpensesAdapter.ExpenseViewHolder>() {
+class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>() {
 
     private var oldExpenseList: List<Expense> = emptyList()
 
-    inner class ExpenseViewHolder(val binding: RvExpenseItemBinding) :
+    inner class TransactionViewHolder(val binding: RvExpenseItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
-        return ExpenseViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionAdapter.TransactionViewHolder {
+        return TransactionViewHolder(
             RvExpenseItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -28,7 +29,7 @@ class ExpensesAdapter : RecyclerView.Adapter<ExpensesAdapter.ExpenseViewHolder>(
         )
     }
 
-    override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TransactionAdapter.TransactionViewHolder, position: Int) {
         val expense = oldExpenseList[position]
         with(holder.binding) {
             expenseName.text = expense.title
@@ -107,9 +108,10 @@ class ExpensesAdapter : RecyclerView.Adapter<ExpensesAdapter.ExpenseViewHolder>(
     }
 
     fun setData(newExpenseList: List<Expense>) {
-        val diffUtil = ExpensesDiffUtil(oldExpenseList, newExpenseList)
+        val diffUtil = TransactionDiffUtil(oldExpenseList, newExpenseList)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         oldExpenseList = newExpenseList
         diffResults.dispatchUpdatesTo(this)
     }
+
 }

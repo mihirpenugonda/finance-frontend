@@ -45,6 +45,7 @@
                 android:layout_gravity="center_vertical"
                 android:backgroundTint="@color/surface"
                 android:text="@string/text_add_expenses"
+                android:minWidth="120dp"
                 app:cardCornerRadius="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -68,7 +69,7 @@
             android:id="@+id/expenses_fragment_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="0dp"
             android:animateLayoutChanges="true"
             app:layout_constraintTop_toBottomOf="@id/expenses_fragment_header">
 
@@ -89,7 +90,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/expenses_fragment_header" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/expense_income_layout"
@@ -128,12 +129,14 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/type_selector_text"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/view_all_transactions"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="@string/text_all_transactions"
-                    android:textSize="16sp"
+                    android:text="@string/text_view_all_transaction"
+                    android:textSize="14sp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     app:layout_constraintBottom_toBottomOf="@id/type_selector"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/type_selector" />
@@ -156,7 +159,7 @@
                     android:layout_marginEnd="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/type_selector_text"
+                    app:layout_constraintTop_toBottomOf="@+id/view_all_transactions"
                     tools:listitem="@layout/rv_expense_item" />
 
                 <Space

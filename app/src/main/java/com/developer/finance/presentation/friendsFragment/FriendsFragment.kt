@@ -18,10 +18,6 @@ class FriendsFragment : BaseFragment<FragmentFriendsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.addSplitButton.setOnClickListener {
-            findNavController().navigate(R.id.add_transaction_activity)
-        }
     }
 
     override fun getViewBinding(

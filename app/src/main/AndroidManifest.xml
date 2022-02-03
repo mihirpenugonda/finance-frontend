@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Finance">
         <activity
+            android:name=".presentation.transactionActivity.TransactionActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -21,8 +24,7 @@
         </activity>
         <activity
             android:name=".presentation.addTransaction.AddTransactionActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

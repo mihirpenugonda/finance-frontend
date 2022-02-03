@@ -13,26 +13,21 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.developer.finance.R
 import com.developer.finance.common.base.BaseFragment
 import com.developer.finance.data.local.entity.Expense
 import com.developer.finance.databinding.FragmentExpensesBinding
-import com.developer.finance.presentation.expensesFragment.adapter.ExpensesAdapter
 import kotlinx.coroutines.flow.collect
 
 
 class ExpensesFragment : BaseFragment<FragmentExpensesBinding>() {
 
     val viewModel: ExpensesViewModel by activityViewModels<ExpensesViewModel>()
-    private val adapter by lazy {
-        ExpensesAdapter()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        initRv()
+//        initRv()
         launchExpenseListener()
         launchFilterListener()
     }
@@ -59,17 +54,14 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>() {
                 when (position) {
                     0 -> {
                         viewModel.setOverall()
-                        binding.typeSelectorText.text = getString(R.string.text_all_transactions)
                         overallMode()
                     }
                     1 -> {
                         viewModel.setIncome()
-                        binding.typeSelectorText.text = getString(R.string.text_all_income)
                         incomeMode()
                     }
                     2 -> {
                         viewModel.setExpense()
-                        binding.typeSelectorText.text = getString(R.string.text_all_expenses)
                         expenseMode()
                     }
                 }
@@ -80,8 +72,10 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>() {
             }
         }
 
-        adapter.setOnItemClickListener {
+        binding.viewAllTransactions.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_expenses_to_transactionActivity)
         }
+
     }
 
     private fun launchFilterListener() {
@@ -113,22 +107,22 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>() {
                         Log.d("Updated", event.expenses.size.toString())
                         calculateTotalIncomeExpense(event.expenses)
                         displayMode()
-                        updateRv(event.expenses)
+//                        updateRv(event.expenses)
                     }
                     else -> {}
                 }
             }
         }
 
-    private fun initRv() {
-        val layoutManager: LinearLayoutManager = LinearLayoutManager(requireContext())
-        binding.expensesRecyclerView.adapter = adapter
-        binding.expensesRecyclerView.layoutManager = layoutManager
-    }
+//    private fun initRv() {
+//        val layoutManager: LinearLayoutManager = LinearLayoutManager(requireContext())
+//        binding.expensesRecyclerView.adapter = adapter
+//        binding.expensesRecyclerView.layoutManager = layoutManager
+//    }
 
-    private fun updateRv(newExpenses: List<Expense>) {
-        adapter.setData(newExpenses)
-    }
+//    private fun updateRv(newExpenses: List<Expense>) {
+//        adapter.setData(newExpenses)
+//    }
 
     @SuppressLint("SetTextI18n")
     private fun calculateTotalIncomeExpense(expenses: List<Expense>) {
