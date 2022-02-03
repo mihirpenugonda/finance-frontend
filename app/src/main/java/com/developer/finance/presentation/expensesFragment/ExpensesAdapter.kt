@@ -57,34 +57,34 @@ class ExpensesAdapter : RecyclerView.Adapter<ExpensesAdapter.ExpenseViewHolder>(
             }
 
             when (expense.category) {
-                "Housing" -> {
+                "housing" -> {
                     categoryImage.setImageResource(R.drawable.ic_food)
                 }
-                "Transportation" -> {
+                "transportation" -> {
                     categoryImage.setImageResource(R.drawable.ic_transport)
                 }
-                "Food" -> {
+                "food" -> {
                     categoryImage.setImageResource(R.drawable.ic_food)
                 }
-                "Utilities" -> {
+                "utilities" -> {
                     categoryImage.setImageResource(R.drawable.ic_utilities)
                 }
-                "Insurance" -> {
+                "insurance" -> {
                     categoryImage.setImageResource(R.drawable.ic_insurance)
                 }
-                "Healthcare" -> {
+                "healthcare" -> {
                     categoryImage.setImageResource(R.drawable.ic_medical)
                 }
-                "Saving & Debts" -> {
+                "saving & debts" -> {
                     categoryImage.setImageResource(R.drawable.ic_savings)
                 }
-                "Personal Spending" -> {
+                "personal spending" -> {
                     categoryImage.setImageResource(R.drawable.ic_personal_spending)
                 }
-                "Entertainment" -> {
+                "entertainment" -> {
                     categoryImage.setImageResource(R.drawable.ic_entertainment)
                 }
-                "Miscellaneous" -> {
+                "miscellaneous" -> {
                     categoryImage.setImageResource(R.drawable.ic_others)
                 }
                 else -> {

@@ -31,11 +31,9 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding, ExpensesViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        initRv()
         launchExpenseListener()
         launchFilterListener()
-        initRv()
-
-
     }
 
     private fun initViews() {
@@ -104,11 +102,12 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding, ExpensesViewModel
             viewModel.state.collect { event ->
                 when (event) {
                     is ExpensesFragmentEvent.Empty -> {
-
+                        emptyMode()
                     }
                     is ExpensesFragmentEvent.Success -> {
                         Log.d("Updated", event.expenses.size.toString())
                         calculateTotalIncomeExpense(event.expenses)
+                        displayMode()
                         updateRv(event.expenses)
                     }
                     else -> {}
@@ -174,6 +173,18 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding, ExpensesViewModel
         totalIncomeCardView.totalIncomeCardView.visibility = View.VISIBLE
         expenseIncomeLayoutSpacer.visibility = View.GONE
     }
+
+    private fun emptyMode() = with(binding) {
+        expensesFragmentScrollView.visibility = View.GONE
+        expensesFragmentEmptyLayout.emptyStateLayout.visibility = View.VISIBLE
+    }
+
+    private fun displayMode() = with(binding) {
+        expensesFragmentScrollView.visibility = View.VISIBLE
+        expensesFragmentEmptyLayout.emptyStateLayout.visibility = View.GONE
+    }
+
+
 
     override fun getViewBinding(
         inflater: LayoutInflater,

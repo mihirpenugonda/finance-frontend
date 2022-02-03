@@ -27,7 +27,7 @@
                 android:id="@+id/nameExpenseParent"
                 style="@style/PrimaryEditText"
                 android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_title">
@@ -35,14 +35,14 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nameExpense"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp" />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/descriptionExpenseParent"
                 style="@style/PrimaryEditText"
                 android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_description">
@@ -50,14 +50,14 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/descriptionExpense"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp" />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/amountExpenseParent"
                 style="@style/PrimaryEditText"
                 android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_expense_amount">
@@ -65,14 +65,14 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/amountExpense"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp" />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/datePickerParent"
                 style="@style/PrimaryEditText"
                 android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_date">
@@ -80,28 +80,28 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/datePicker"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:focusable="false"
+                    android:layout_height="wrap_content"
                     android:cursorVisible="false"
-                    android:inputType="none"/>
+                    android:focusable="false"
+                    android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/categoryPickerParent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_category"
+                app:boxBackgroundColor="@color/surface"
                 app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxBackgroundColor="@color/surface">
+                app:boxCornerRadiusTopStart="5dp">
 
                 <AutoCompleteTextView
                     android:id="@+id/categoryPicker"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:inputType="none"
                     tools:ignore="LabelFor" />
 
@@ -111,36 +111,42 @@
                 android:id="@+id/typePickerParent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="300dp"
-                android:layout_height="80dp"
+                android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_expense_transaction_type"
+                app:boxBackgroundColor="@color/surface"
                 app:boxCornerRadiusTopEnd="5dp"
-                app:boxCornerRadiusTopStart="5dp"
-                app:boxBackgroundColor="@color/surface">
+
+                app:boxCornerRadiusTopStart="5dp">
 
                 <AutoCompleteTextView
                     android:id="@+id/typePicker"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:inputType="none"
                     tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/add_button"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/add_expense_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:background="@color/surface"
-                android:fontFamily="@font/open_sans_regular"
-                android:padding="10dp"
-                android:textAllCaps="false"
-                android:text="@string/text_add_expense"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/surface">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:padding="10dp"
+                    android:text="@string/text_add_expense"
+                    android:textSize="16sp" />
+
+            </androidx.cardview.widget.CardView>
 
 
         </LinearLayout>

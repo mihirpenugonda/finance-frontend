@@ -36,7 +36,7 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseTabBinding, AddTransac
     }
 
     private fun initViews() {
-        binding.addButton.setOnClickListener {
+        binding.addExpenseButton.setOnClickListener {
             val expense = handleSubmit()
 
             if (expense != null) {
