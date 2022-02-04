@@ -13,7 +13,7 @@
         android:id="@+id/fragment_expenses"
         android:name="com.developer.finance.presentation.expensesFragment.ExpensesFragment"
         android:label="ExpensesFragment"
-        tools:layout="@layout/fragment_expenses" >
+        tools:layout="@layout/fragment_expenses_dashboard" >
         <action
             android:id="@+id/action_fragment_expenses_to_transactionActivity"
             app:destination="@id/transactionActivity" />
@@ -26,5 +26,5 @@
         android:id="@+id/transactionActivity"
         android:name="com.developer.finance.presentation.transactionActivity.TransactionActivity"
         android:label="activity_transaction"
-        tools:layout="@layout/activity_transaction" />
+        tools:layout="@layout/activity_all_transactions" />
 </navigation>

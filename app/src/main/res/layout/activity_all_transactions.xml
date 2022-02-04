@@ -67,30 +67,62 @@
                         android:textSize="12sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <ImageView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/transaction_filter_view_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_edit"
                     app:layout_constraintBottom_toBottomOf="@id/search_input_parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@id/search_input_parent"
-                    app:layout_constraintTop_toTopOf="@id/search_input_parent" />
+                    app:layout_constraintTop_toTopOf="@id/search_input_parent">
+
+                    <TextView
+                        android:id="@+id/transaction_filter_view_button_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="filter"
+                        app:layout_constraintBottom_toBottomOf="@id/transaction_filter_view_button_image"
+                        app:layout_constraintTop_toTopOf="@id/transaction_filter_view_button_image"
+                        app:layout_constraintEnd_toStartOf="@id/transaction_filter_view_button_image"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/transaction_filter_view_button_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_filter"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/transaction_filter_view"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginTop="16dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/search_input_parent">
 
-                    <Spinner
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:text="category filter"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/transaction_category_spinner"
+                        app:layout_constraintEnd_toStartOf="@id/transaction_category_spinner"
+                        app:layout_constraintTop_toTopOf="@id/transaction_category_spinner" />
 
+                    <Spinner
                         android:id="@+id/transaction_category_spinner"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
@@ -99,6 +131,16 @@
                         android:elevation="40dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:text="type filter"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/transaction_type_spinner"
+                        app:layout_constraintEnd_toStartOf="@id/transaction_type_spinner"
+                        app:layout_constraintTop_toTopOf="@id/transaction_type_spinner" />
 
                     <Spinner
                         android:id="@+id/transaction_type_spinner"
@@ -117,6 +159,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:animateLayoutChanges="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/transaction_filter_view"

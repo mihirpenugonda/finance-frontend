@@ -3,11 +3,13 @@ package com.developer.finance.common
 object Constants {
 
     val transactionTypes = listOf(
+        "overall",
         "income",
         "expense"
     )
 
     val transactionCategory = listOf(
+        "all",
         "housing",
         "transportation",
         "food",

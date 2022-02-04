@@ -1,15 +1,14 @@
 package com.developer.finance.presentation.transactionActivity
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.developer.finance.data.local.entity.Expense
 import com.developer.finance.domain.repository.ExpenseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,14 +23,11 @@ class TransactionViewModel @Inject constructor(
 
     var queryJob: Job? = null
 
-    private val _transactionFilter = MutableStateFlow<String>("")
-    val transactionFilter: StateFlow<String> = _transactionFilter
-
     init {
         getExpenses("overall")
     }
 
-    fun getExpenses(transactionType: String) {
+    private fun getExpenses(transactionType: String) {
         expenseRepository.getAllExpensesFlow(transactionType).onEach { result ->
             if (result.isNullOrEmpty()) {
                 _state.value = TransactionsFragmentEvent.Empty
@@ -41,39 +37,23 @@ class TransactionViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun getQueryExpenses(search: String) {
-        queryJob?.cancel()
-        queryJob = expenseRepository.getQueryExpensesFlow(search).onEach { result ->
-            delay(200)
-            if (result.isNullOrEmpty()) {
-                _state.value = TransactionsFragmentEvent.Empty
-            } else {
-                _state.value = TransactionsFragmentEvent.Success(result)
-            }
-        }.launchIn(viewModelScope)
-    }
-
-    fun getCategoryExpenses(categories: List<String>) {
+    fun getExpenses(search: String,category: String, type: String) {
         viewModelScope.launch {
-            val result =
-                expenseRepository.getCategoryExpense(categories)
+            Log.d("Expenses Filters", "$search $category $type")
+            var result = expenseRepository.getQueryExpenses(search)
+            Log.d("Result", result.toString())
+
+            if(category != "all") {
+                result = result.filter { it.category == category }
+            }
+            if (type != "overall") {
+                result = result.filter { it.type == type }
+            }
             if (result.isNullOrEmpty()) {
                 _state.value = TransactionsFragmentEvent.Empty
             } else {
                 _state.value = TransactionsFragmentEvent.Success(result)
             }
         }
-    }
-
-    fun setOverall() {
-        _transactionFilter.value = "overall"
-    }
-
-    fun setIncome() {
-        _transactionFilter.value = "income"
-    }
-
-    fun setExpense() {
-        _transactionFilter.value = "expense"
     }
 }

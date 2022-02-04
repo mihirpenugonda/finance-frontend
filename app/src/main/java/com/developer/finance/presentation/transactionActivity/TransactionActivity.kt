@@ -1,6 +1,7 @@
 package com.developer.finance.presentation.transactionActivity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -9,39 +10,57 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.Fade
+import androidx.transition.Transition
+import androidx.transition.TransitionManager
 import com.developer.finance.R
 import com.developer.finance.common.Constants
 import com.developer.finance.data.local.entity.Expense
-import com.developer.finance.databinding.ActivityTransactionBinding
+import com.developer.finance.databinding.ActivityAllTransactionsBinding
 import com.developer.finance.presentation.transactionActivity.adapter.TransactionAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
+
 @AndroidEntryPoint
 class TransactionActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityTransactionBinding
+    private lateinit var binding: ActivityAllTransactionsBinding
     private val adapter by lazy {
         TransactionAdapter()
     }
+
     private var filterViewVisible = false
-    private val categoriesFilter = mutableListOf<String>()
+    private var categoryFilter = "all"
+    private var typeFilter = "overall"
+    private var searchFilter = ""
 
     private val viewModel: TransactionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTransactionBinding.inflate(layoutInflater)
+        binding = ActivityAllTransactionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews()
+        setupSpinnerListeners()
         initRv()
-        launchExpenseListener()
+        launchEventListener()
         launchSearchListener()
-        launchFilterListener()
+
+        Log.d("When Created", "$categoryFilter $typeFilter")
     }
 
     private fun initViews() {
         binding.transactionFilterViewButton.setOnClickListener {
+            val transition: Transition = Fade()
+            transition.duration = 600
+            transition.addTarget(binding.transactionFilterView)
+
+            TransitionManager.beginDelayedTransition(
+                binding.transactionFilterView,
+                transition
+            )
+
             if (filterViewVisible) {
                 binding.transactionFilterView.visibility = View.VISIBLE
                 filterViewVisible = !filterViewVisible
@@ -50,7 +69,9 @@ class TransactionActivity : AppCompatActivity() {
                 filterViewVisible = !filterViewVisible
             }
         }
+    }
 
+    private fun setupSpinnerListeners() {
         val categoryAdapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
             this,
             R.array.categories,
@@ -58,6 +79,22 @@ class TransactionActivity : AppCompatActivity() {
         )
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.transactionCategorySpinner.adapter = categoryAdapter
+        binding.transactionCategorySpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    categoryFilter = Constants.transactionCategory[position]
+                    Log.d("Category Spinner", "$categoryFilter $typeFilter")
+                    viewModel.getExpenses(searchFilter, categoryFilter, typeFilter)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            }
 
         val typeAdapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(
             this,
@@ -66,7 +103,6 @@ class TransactionActivity : AppCompatActivity() {
         )
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.transactionTypeSpinner.adapter = typeAdapter
-
         binding.transactionTypeSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -75,40 +111,12 @@ class TransactionActivity : AppCompatActivity() {
                     position: Int,
                     id: Long
                 ) {
-                    when (position) {
-                        0 -> {
-                            viewModel.setOverall()
-                        }
-                        1 -> {
-                            viewModel.setIncome()
-                        }
-                        2 -> {
-                            viewModel.setExpense()
-                        }
-                    }
+                    typeFilter = Constants.transactionTypes[position]
+                    viewModel.getExpenses(searchFilter, categoryFilter, typeFilter)
                 }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    viewModel.getExpenses("overall")
-                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
-
-        binding.transactionCategorySpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                categoriesFilter.add(Constants.transactionCategory[position])
-                viewModel.getCategoryExpenses(categoriesFilter)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-        }
     }
 
     private fun initRv() {
@@ -117,7 +125,7 @@ class TransactionActivity : AppCompatActivity() {
         binding.transactionsRecyclerView.layoutManager = layoutManager
     }
 
-    private fun launchExpenseListener() =
+    private fun launchEventListener() =
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect { event ->
                 when (event) {
@@ -132,29 +140,9 @@ class TransactionActivity : AppCompatActivity() {
         }
 
     private fun launchSearchListener() {
-        binding.searchInput.doOnTextChanged { text, start, before, count ->
-            if (text.toString() == "") {
-                viewModel.getExpenses("overall")
-            }
-            viewModel.getQueryExpenses(text.toString())
-        }
-    }
-
-    private fun launchFilterListener() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.transactionFilter.collect { filter ->
-                when (filter) {
-                    "overall" -> {
-                        viewModel.getExpenses("overall")
-                    }
-                    "income" -> {
-                        viewModel.getExpenses("income")
-                    }
-                    "expense" -> {
-                        viewModel.getExpenses("expense")
-                    }
-                }
-            }
+        binding.searchInput.doOnTextChanged { text, _, _, _ ->
+            searchFilter = text.toString()
+            viewModel.getExpenses(searchFilter, categoryFilter, typeFilter)
         }
     }
 

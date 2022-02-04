@@ -7,12 +7,14 @@
         <entry key="app/src/main/res/drawable/edit_text_background.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/ic_baseline_calendar.xml" value="0.2705" />
         <entry key="app/src/main/res/drawable/ic_expenses.xml" value="0.278" />
+        <entry key="app/src/main/res/drawable/ic_filter.xml" value="0.2445" />
         <entry key="app/src/main/res/drawable/ic_group.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/ic_housing.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/ic_income.xml" value="0.1595" />
         <entry key="app/src/main/res/font/open_sans_regular.xml" value="0.2859375" />
         <entry key="app/src/main/res/font/open_sans_semibold.xml" value="0.2859375" />
         <entry key="app/src/main/res/layout/activity_add_transaction.xml" value="0.13652482269503546" />
+        <entry key="app/src/main/res/layout/activity_all_transactions.xml" value="0.4656911214192709" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_transaction.xml" value="0.37003597555178563" />
         <entry key="app/src/main/res/layout/add_expense_category_dropdown_item.xml" value="0.13652482269503546" />

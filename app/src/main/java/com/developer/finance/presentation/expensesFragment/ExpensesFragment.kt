@@ -16,11 +16,11 @@ import androidx.navigation.fragment.findNavController
 import com.developer.finance.R
 import com.developer.finance.common.base.BaseFragment
 import com.developer.finance.data.local.entity.Expense
-import com.developer.finance.databinding.FragmentExpensesBinding
+import com.developer.finance.databinding.FragmentExpensesDashboardBinding
 import kotlinx.coroutines.flow.collect
 
 
-class ExpensesFragment : BaseFragment<FragmentExpensesBinding>() {
+class ExpensesFragment : BaseFragment<FragmentExpensesDashboardBinding>() {
 
     val viewModel: ExpensesViewModel by activityViewModels<ExpensesViewModel>()
 
@@ -81,17 +81,7 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>() {
     private fun launchFilterListener() {
         lifecycleScope.launchWhenStarted {
             viewModel.transactionFilter.collect { filter ->
-                when (filter) {
-                    "overall" -> {
-                        viewModel.getExpenses("overall")
-                    }
-                    "income" -> {
-                        viewModel.getExpenses("income")
-                    }
-                    "expense" -> {
-                        viewModel.getExpenses("expense")
-                    }
-                }
+                viewModel.getExpenses(filter)
             }
         }
     }
@@ -107,7 +97,6 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>() {
                         Log.d("Updated", event.expenses.size.toString())
                         calculateTotalIncomeExpense(event.expenses)
                         displayMode()
-//                        updateRv(event.expenses)
                     }
                     else -> {}
                 }
@@ -174,11 +163,11 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>() {
     }
 
 
-
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentExpensesBinding = FragmentExpensesBinding.inflate(inflater, container, false)
+    ): FragmentExpensesDashboardBinding =
+        FragmentExpensesDashboardBinding.inflate(inflater, container, false)
 
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
         return if (enter) {

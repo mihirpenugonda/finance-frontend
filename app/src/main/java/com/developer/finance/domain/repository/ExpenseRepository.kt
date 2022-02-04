@@ -8,8 +8,8 @@ interface ExpenseRepository {
     suspend fun deleteExpense(id: Int)
     suspend fun getAllExpense(): List<Expense>
     suspend fun deleteAllExpenses()
-    suspend fun getCategoryExpense(categories: List<String>): List<Expense>
+    suspend fun getCategoryExpense(category: String): List<Expense>
 
     fun getAllExpensesFlow(transactionType: String): Flow<List<Expense>>
-    fun getQueryExpensesFlow(search: String): Flow<List<Expense>>
+    suspend fun getQueryExpenses(search: String): List<Expense>
 }

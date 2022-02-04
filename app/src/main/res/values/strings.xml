@@ -67,6 +67,7 @@
     </string-array>
 
     <string-array name="categories">
+        <item>all</item>
         <item>housing</item>
         <item>transportation</item>
         <item>food</item>

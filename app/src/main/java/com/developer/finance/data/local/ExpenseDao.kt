@@ -19,10 +19,10 @@ interface ExpenseDao {
     fun getAllExpenseFlow(): Flow<List<Expense>>
 
     @Query("SELECT * FROM expense WHERE title LIKE '%'||:search||'%' OR description LIKE '%'||:search||'%'")
-    fun getQueryExpensesFlow(search: String): Flow<List<Expense>>
+    suspend fun getQueryExpenses(search: String): List<Expense>
 
-    @Query("SELECT * FROM expense WHERE category in (:categories)")
-    suspend fun getCategoryExpenses(categories: List<String>): List<Expense>
+    @Query("SELECT * FROM expense WHERE category in (:category)")
+    suspend fun getCategoryExpenses(category: String): List<Expense>
 
     @Query("SELECT * FROM expense")
     suspend fun getAllExpense(): List<Expense>
