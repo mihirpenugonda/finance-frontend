@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.transactionActivity.adapter
+package com.developer.finance.presentation.allTransactionActivity.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,20 +6,24 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.finance.R
-import com.developer.finance.data.local.entity.Expense
+import com.developer.finance.common.DateTimeConverter
+import com.developer.finance.data.local.entity.Transaction
 import com.developer.finance.databinding.RvExpenseItemBinding
-import com.developer.finance.presentation.expensesFragment.adapter.TransactionDiffUtil
+import com.developer.finance.presentation.expensesFragment.adapter.AllTransactionDiffUtil
 
-class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>() {
+class AllTransactionAdapter : RecyclerView.Adapter<AllTransactionAdapter.TransactionViewHolder>() {
 
-    private var oldExpenseList: List<Expense> = emptyList()
+    private var oldExpenseList: List<Transaction> = emptyList()
 
     inner class TransactionViewHolder(val binding: RvExpenseItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionAdapter.TransactionViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): AllTransactionAdapter.TransactionViewHolder {
         return TransactionViewHolder(
             RvExpenseItemBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -29,11 +33,14 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVi
         )
     }
 
-    override fun onBindViewHolder(holder: TransactionAdapter.TransactionViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: AllTransactionAdapter.TransactionViewHolder,
+        position: Int
+    ) {
         val expense = oldExpenseList[position]
         with(holder.binding) {
             expenseName.text = expense.title
-            expenseDate.text = expense.date
+            expenseDate.text = DateTimeConverter().format(expense.date)
             expenseCategory.text = expense.category
             expenseAmount.text = expense.amount
 
@@ -94,7 +101,7 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVi
             }
         }
         holder.itemView.setOnClickListener {
-            onItemClickListener?.let {it(expense)}
+            onItemClickListener?.let { it(expense) }
         }
     }
 
@@ -102,13 +109,13 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVi
         return oldExpenseList.size
     }
 
-    private var onItemClickListener: ((Expense) -> Unit)? = null
-    fun setOnItemClickListener(listener: (Expense) -> Unit) {
+    private var onItemClickListener: ((Transaction) -> Unit)? = null
+    fun setOnItemClickListener(listener: (Transaction) -> Unit) {
         onItemClickListener = listener
     }
 
-    fun setData(newExpenseList: List<Expense>) {
-        val diffUtil = TransactionDiffUtil(oldExpenseList, newExpenseList)
+    fun setData(newExpenseList: List<Transaction>) {
+        val diffUtil = AllTransactionDiffUtil(oldExpenseList, newExpenseList)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         oldExpenseList = newExpenseList
         diffResults.dispatchUpdatesTo(this)

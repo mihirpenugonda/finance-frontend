@@ -2,7 +2,6 @@ package com.developer.finance.presentation.expensesFragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.developer.finance.R
 import com.developer.finance.common.base.BaseFragment
-import com.developer.finance.data.local.entity.Expense
+import com.developer.finance.data.local.entity.Transaction
 import com.developer.finance.databinding.FragmentExpensesDashboardBinding
 import kotlinx.coroutines.flow.collect
 
@@ -30,6 +29,7 @@ class ExpensesFragment : BaseFragment<FragmentExpensesDashboardBinding>() {
 //        initRv()
         launchExpenseListener()
         launchFilterListener()
+
     }
 
     private fun initViews() {
@@ -94,7 +94,6 @@ class ExpensesFragment : BaseFragment<FragmentExpensesDashboardBinding>() {
                         emptyMode()
                     }
                     is ExpensesFragmentEvent.Success -> {
-                        Log.d("Updated", event.expenses.size.toString())
                         calculateTotalIncomeExpense(event.expenses)
                         displayMode()
                     }
@@ -104,7 +103,7 @@ class ExpensesFragment : BaseFragment<FragmentExpensesDashboardBinding>() {
         }
 
     @SuppressLint("SetTextI18n")
-    private fun calculateTotalIncomeExpense(expenses: List<Expense>) {
+    private fun calculateTotalIncomeExpense(expenses: List<Transaction>) {
         val (totalIncome, totalExpense) = expenses.partition { it.type == "income" }
         val income = totalIncome.sumOf { Integer.parseInt(it.amount) }
         val expense = totalExpense.sumOf { Integer.parseInt(it.amount) }
@@ -162,7 +161,6 @@ class ExpensesFragment : BaseFragment<FragmentExpensesDashboardBinding>() {
         expensesFragmentEmptyLayout.visibility = View.GONE
     }
 
-
     override fun getViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -175,5 +173,10 @@ class ExpensesFragment : BaseFragment<FragmentExpensesDashboardBinding>() {
         } else {
             AnimationUtils.loadAnimation(context, R.anim.empty_anim)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getExpenses("overall")
     }
 }

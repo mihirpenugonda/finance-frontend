@@ -6,11 +6,11 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity
-data class Expense(
+data class Transaction(
     @ColumnInfo(name = "title") var title: String,
     @ColumnInfo(name = "description") var description: String,
     @ColumnInfo(name = "amount") var amount: String,
-    @ColumnInfo(name = "date") var date: String,
+    @ColumnInfo(name = "date") var date: Long,
     @ColumnInfo(name = "category") var category: String,
     @ColumnInfo(name = "type") var type: String,
     @ColumnInfo(name = "created_at") var created_at: Long = System.currentTimeMillis(),

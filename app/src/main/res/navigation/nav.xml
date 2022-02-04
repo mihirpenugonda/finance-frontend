@@ -24,7 +24,7 @@
         android:label="AddTransactionActivity" />
     <activity
         android:id="@+id/transactionActivity"
-        android:name="com.developer.finance.presentation.transactionActivity.TransactionActivity"
+        android:name="com.developer.finance.presentation.allTransactionActivity.AllTransactionActivity"
         android:label="activity_transaction"
         tools:layout="@layout/activity_all_transactions" />
 </navigation>

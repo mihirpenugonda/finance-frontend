@@ -2,7 +2,7 @@ package com.developer.finance.presentation.expensesFragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.developer.finance.domain.repository.ExpenseRepository
+import com.developer.finance.domain.repository.TransactionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExpensesViewModel @Inject constructor(
-    private val expenseRepository: ExpenseRepository
+    private val expenseRepository: TransactionRepository
 ) : ViewModel() {
 
     init {
@@ -33,6 +33,10 @@ class ExpensesViewModel @Inject constructor(
                 _state.value = ExpensesFragmentEvent.Success(result)
             }
         }.launchIn(viewModelScope)
+    }
+
+    suspend fun deleteAll() {
+        expenseRepository.deleteAllExpenses()
     }
 
     fun setOverall() {

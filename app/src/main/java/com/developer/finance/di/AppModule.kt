@@ -1,14 +1,10 @@
 package com.developer.finance.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
-import com.developer.finance.common.UIModeDataStore
-import com.developer.finance.common.UIModeImpl
-import com.developer.finance.data.local.ExpenseDao
-import com.developer.finance.data.local.ExpenseDatabase
-import com.developer.finance.data.repository.ExpenseRepositoryImpl
-import com.developer.finance.domain.repository.ExpenseRepository
+import com.developer.finance.data.local.TransactionDatabase
+import com.developer.finance.data.repository.TransactionRepositoryImpl
+import com.developer.finance.domain.repository.TransactionRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,22 +18,19 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesUIDataStore(@ApplicationContext context: Context): UIModeImpl {
-        return UIModeDataStore(context)
-    }
-
-    @Singleton
-    @Provides
     fun providesExpenseRepository(
-        db: ExpenseDatabase
-    ): ExpenseRepository {
-        return ExpenseRepositoryImpl(db.expenseDao)
+        db: TransactionDatabase
+    ): TransactionRepository {
+        return TransactionRepositoryImpl(db.expenseDao)
     }
 
     @Singleton
     @Provides
-    fun provideExpensesDatabase(@ApplicationContext context: Context): ExpenseDatabase {
-        return Room.databaseBuilder(context, ExpenseDatabase::class.java, "expense_management_db").build()
+    fun provideExpensesDatabase(@ApplicationContext context: Context): TransactionDatabase {
+        return Room.databaseBuilder(
+            context,
+            TransactionDatabase::class.java,
+            "transaction_management_d7"
+        ).build()
     }
-
 }

@@ -6,14 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.core.view.children
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.developer.finance.R
 import com.developer.finance.common.Constants
 import com.developer.finance.common.base.BaseFragment
-import com.developer.finance.data.local.entity.Expense
+import com.developer.finance.data.local.entity.Transaction
 import com.developer.finance.databinding.FragmentAddExpenseTabBinding
 import com.developer.finance.presentation.addTransaction.AddTransactionViewModel
 import com.developer.finance.presentation.addTransaction.components.DatePickerText
@@ -58,14 +57,14 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseTabBinding>() {
         val categoryAdapter: ArrayAdapter<String> = ArrayAdapter(
             requireContext(),
             R.layout.dropdown_item,
-            Constants.transactionCategory
+            Constants.transactionCategory.filter { it != "all" }
         )
         binding.categoryPicker.setAdapter(categoryAdapter)
 
         val typeAdapter: ArrayAdapter<String> = ArrayAdapter(
             requireContext(),
             R.layout.dropdown_item,
-            Constants.transactionTypes
+            Constants.transactionTypes.filter { it != "overall" }
         )
         binding.typePicker.setAdapter(typeAdapter)
 
@@ -86,16 +85,16 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseTabBinding>() {
         }
     }
 
-    private fun handleSubmit(): Expense? {
+    private fun handleSubmit(): Transaction? {
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
-        val date: String = if (binding.datePicker.text.toString() != "") {
-            val dateObject: Date = formatter.parse(binding.datePicker.text.toString())!!
-            SimpleDateFormat("dd/MM/yyyy", Locale.US).format(dateObject)
+        val date: Long = if (binding.datePicker.text.toString() != "") {
+            val dateObject: Long = formatter.parse(binding.datePicker.text.toString())!!.time
+            dateObject
         } else {
-            ""
+            0
         }
 
-        val newExpense = Expense(
+        val newExpense = Transaction(
             binding.nameExpense.text.toString(),
             binding.descriptionExpense.text.toString(),
             binding.amountExpense.text.toString(),
@@ -124,7 +123,7 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseTabBinding>() {
             binding.amountExpenseParent.error = "enter valid number"
             isValidated = false
         }
-        if (newExpense.date.isEmpty()) {
+        if (newExpense.date.toString() == "") {
             binding.datePickerParent.error = "date cant be empty"
             isValidated = false
         }

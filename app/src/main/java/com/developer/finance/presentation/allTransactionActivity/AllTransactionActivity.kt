@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.transactionActivity
+package com.developer.finance.presentation.allTransactionActivity
 
 import android.os.Bundle
 import android.util.Log
@@ -15,19 +15,19 @@ import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import com.developer.finance.R
 import com.developer.finance.common.Constants
-import com.developer.finance.data.local.entity.Expense
+import com.developer.finance.data.local.entity.Transaction
 import com.developer.finance.databinding.ActivityAllTransactionsBinding
-import com.developer.finance.presentation.transactionActivity.adapter.TransactionAdapter
+import com.developer.finance.presentation.allTransactionActivity.adapter.AllTransactionAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 
 @AndroidEntryPoint
-class TransactionActivity : AppCompatActivity() {
+class AllTransactionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAllTransactionsBinding
     private val adapter by lazy {
-        TransactionAdapter()
+        AllTransactionAdapter()
     }
 
     private var filterViewVisible = false
@@ -35,7 +35,7 @@ class TransactionActivity : AppCompatActivity() {
     private var typeFilter = "overall"
     private var searchFilter = ""
 
-    private val viewModel: TransactionViewModel by viewModels()
+    private val viewModelAll: AllTransactionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +89,7 @@ class TransactionActivity : AppCompatActivity() {
                 ) {
                     categoryFilter = Constants.transactionCategory[position]
                     Log.d("Category Spinner", "$categoryFilter $typeFilter")
-                    viewModel.getExpenses(searchFilter, categoryFilter, typeFilter)
+                    viewModelAll.getExpenses(searchFilter, categoryFilter, typeFilter)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -112,7 +112,7 @@ class TransactionActivity : AppCompatActivity() {
                     id: Long
                 ) {
                     typeFilter = Constants.transactionTypes[position]
-                    viewModel.getExpenses(searchFilter, categoryFilter, typeFilter)
+                    viewModelAll.getExpenses(searchFilter, categoryFilter, typeFilter)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -127,7 +127,7 @@ class TransactionActivity : AppCompatActivity() {
 
     private fun launchEventListener() =
         lifecycleScope.launchWhenStarted {
-            viewModel.state.collect { event ->
+            viewModelAll.state.collect { event ->
                 when (event) {
                     is TransactionsFragmentEvent.Empty -> {
                     }
@@ -142,11 +142,11 @@ class TransactionActivity : AppCompatActivity() {
     private fun launchSearchListener() {
         binding.searchInput.doOnTextChanged { text, _, _, _ ->
             searchFilter = text.toString()
-            viewModel.getExpenses(searchFilter, categoryFilter, typeFilter)
+            viewModelAll.getExpenses(searchFilter, categoryFilter, typeFilter)
         }
     }
 
-    private fun updateRv(newExpenses: List<Expense>) {
+    private fun updateRv(newExpenses: List<Transaction>) {
         adapter.setData(newExpenses)
     }
 }

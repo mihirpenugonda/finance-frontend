@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Finance">
         <activity
-            android:name=".presentation.transactionActivity.TransactionActivity"
+            android:name=".presentation.allTransactionActivity.AllTransactionActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.MainActivity"
@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name=".presentation.addTransaction.AddTransactionActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
