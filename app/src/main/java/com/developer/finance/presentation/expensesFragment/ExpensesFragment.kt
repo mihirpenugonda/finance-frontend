@@ -114,16 +114,6 @@ class ExpensesFragment : BaseFragment<FragmentExpensesBinding>() {
             }
         }
 
-//    private fun initRv() {
-//        val layoutManager: LinearLayoutManager = LinearLayoutManager(requireContext())
-//        binding.expensesRecyclerView.adapter = adapter
-//        binding.expensesRecyclerView.layoutManager = layoutManager
-//    }
-
-//    private fun updateRv(newExpenses: List<Expense>) {
-//        adapter.setData(newExpenses)
-//    }
-
     @SuppressLint("SetTextI18n")
     private fun calculateTotalIncomeExpense(expenses: List<Expense>) {
         val (totalIncome, totalExpense) = expenses.partition { it.type == "income" }

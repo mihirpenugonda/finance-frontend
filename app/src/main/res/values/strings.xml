@@ -66,6 +66,19 @@
         <item>expense</item>
     </string-array>
 
+    <string-array name="categories">
+        <item>housing</item>
+        <item>transportation</item>
+        <item>food</item>
+        <item>utilities</item>
+        <item>insurance</item>
+        <item>healthcare</item>
+        <item> saving &amp; debts</item>
+        <item>personal spending</item>
+        <item>entertainment</item>
+        <item>miscellaneous</item>
+    </string-array>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_friends">friends</string>
     <string name="text_view_all_transaction"><![CDATA[view all transaction >]]></string>

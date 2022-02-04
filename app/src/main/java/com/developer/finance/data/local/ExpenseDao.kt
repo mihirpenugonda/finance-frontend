@@ -1,6 +1,5 @@
 package com.developer.finance.data.local
 
-import android.provider.ContactsContract
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -18,6 +17,12 @@ interface ExpenseDao {
 
     @Query("SELECT * FROM expense ORDER BY created_at DESC")
     fun getAllExpenseFlow(): Flow<List<Expense>>
+
+    @Query("SELECT * FROM expense WHERE title LIKE '%'||:search||'%' OR description LIKE '%'||:search||'%'")
+    fun getQueryExpensesFlow(search: String): Flow<List<Expense>>
+
+    @Query("SELECT * FROM expense WHERE category in (:categories)")
+    suspend fun getCategoryExpenses(categories: List<String>): List<Expense>
 
     @Query("SELECT * FROM expense")
     suspend fun getAllExpense(): List<Expense>

@@ -21,12 +21,20 @@ class ExpenseRepositoryImpl(
         else expenseDao.getAllSingleExpenseFlow(transactionType)
     }
 
+    override fun getQueryExpensesFlow(search: String): Flow<List<Expense>> {
+        return expenseDao.getQueryExpensesFlow(search)
+    }
+
     override suspend fun getAllExpense(): List<Expense> {
         return expenseDao.getAllExpense()
     }
 
     override suspend fun deleteAllExpenses() {
         expenseDao.deleteAllExpenses()
+    }
+
+    override suspend fun getCategoryExpense(categories: List<String>): List<Expense> {
+        return expenseDao.getCategoryExpenses(categories)
     }
 
 }
