@@ -1,8 +1,8 @@
-package com.developer.finance.data.local
+package com.developer.finance.featureExpenseManagement.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.developer.finance.data.local.entity.Transaction
+import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
 
 @Database(
     entities = [Transaction::class],

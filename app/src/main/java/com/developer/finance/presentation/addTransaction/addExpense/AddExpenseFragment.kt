@@ -10,10 +10,10 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.developer.finance.R
-import com.developer.finance.common.Constants
 import com.developer.finance.common.base.BaseFragment
-import com.developer.finance.data.local.entity.Transaction
 import com.developer.finance.databinding.FragmentAddExpenseTabBinding
+import com.developer.finance.featureExpenseManagement.Constants
+import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
 import com.developer.finance.presentation.addTransaction.AddTransactionViewModel
 import com.developer.finance.presentation.addTransaction.components.DatePickerText
 import com.google.android.material.textfield.TextInputLayout
@@ -123,7 +123,7 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseTabBinding>() {
             binding.amountExpenseParent.error = "enter valid number"
             isValidated = false
         }
-        if (newExpense.date.toString() == "") {
+        if (newExpense.date.toString() == "0") {
             binding.datePickerParent.error = "date cant be empty"
             isValidated = false
         }

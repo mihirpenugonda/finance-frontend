@@ -1,7 +1,7 @@
-package com.developer.finance.presentation.expensesFragment.adapter
+package com.developer.finance.featureExpenseManagement.presentation.transactionDashboardFragment.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.developer.finance.data.local.entity.Transaction
+import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
 
 class AllTransactionDiffUtil(
     private val oldList: List<Transaction>,

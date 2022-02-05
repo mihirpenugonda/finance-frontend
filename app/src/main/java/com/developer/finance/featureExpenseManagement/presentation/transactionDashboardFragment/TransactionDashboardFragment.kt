@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.expensesFragment
+package com.developer.finance.featureExpenseManagement.presentation.transactionDashboardFragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,14 +14,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.developer.finance.R
 import com.developer.finance.common.base.BaseFragment
-import com.developer.finance.data.local.entity.Transaction
 import com.developer.finance.databinding.FragmentExpensesDashboardBinding
+import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
 import kotlinx.coroutines.flow.collect
 
 
-class ExpensesFragment : BaseFragment<FragmentExpensesDashboardBinding>() {
+class TransactionDashboardFragment : BaseFragment<FragmentExpensesDashboardBinding>() {
 
-    val viewModel: ExpensesViewModel by activityViewModels<ExpensesViewModel>()
+    val viewModel: TransactionDashboardViewModel by activityViewModels<TransactionDashboardViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -90,10 +90,10 @@ class ExpensesFragment : BaseFragment<FragmentExpensesDashboardBinding>() {
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect { event ->
                 when (event) {
-                    is ExpensesFragmentEvent.Empty -> {
+                    is TransactionDashboardFragmentEvent.Empty -> {
                         emptyMode()
                     }
-                    is ExpensesFragmentEvent.Success -> {
+                    is TransactionDashboardFragmentEvent.Success -> {
                         calculateTotalIncomeExpense(event.expenses)
                         displayMode()
                     }

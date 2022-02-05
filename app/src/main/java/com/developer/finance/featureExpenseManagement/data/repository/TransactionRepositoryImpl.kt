@@ -1,8 +1,8 @@
-package com.developer.finance.data.repository
+package com.developer.finance.featureExpenseManagement.data.repository
 
-import com.developer.finance.data.local.TransactionDao
-import com.developer.finance.data.local.entity.Transaction
-import com.developer.finance.domain.repository.TransactionRepository
+import com.developer.finance.featureExpenseManagement.data.local.TransactionDao
+import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
+import com.developer.finance.featureExpenseManagement.domain.repository.TransactionRepository
 import kotlinx.coroutines.flow.Flow
 
 class TransactionRepositoryImpl(
@@ -35,6 +35,10 @@ class TransactionRepositoryImpl(
 
     override suspend fun getCategoryExpense(category: String): List<Transaction> {
         return expenseDao.getCategoryExpenses(category)
+    }
+
+    override suspend fun getExpenseById(id: Int): Transaction? {
+        return expenseDao.getExpenseById(id)
     }
 
 }

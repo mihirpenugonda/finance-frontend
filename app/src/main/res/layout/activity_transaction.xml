@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".featureExpenseManagement.presentation.transactionActivity.TransactionActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/PrimaryEditText"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:hint="@string/text_title"
+            app:errorTextAppearance="@style/ErrorTextAppearance">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/transaction_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/PrimaryEditText"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:hint="@string/text_description"
+            app:errorTextAppearance="@style/ErrorTextAppearance">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/transaction_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/amountExpenseParent"
+            style="@style/PrimaryEditText"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:hint="@string/text_expense_amount"
+            app:errorTextAppearance="@style/ErrorTextAppearance">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/transaction_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/datePickerParent"
+            style="@style/PrimaryEditText"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:hint="@string/text_date"
+            app:errorTextAppearance="@style/ErrorTextAppearance">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/transaction_date_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:inputType="none"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:hint="@string/text_category"
+            app:boxBackgroundColor="@color/surface"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            app:errorTextAppearance="@style/ErrorTextAppearance">
+
+            <AutoCompleteTextView
+                android:id="@+id/transaction_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:textSize="14sp"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:hint="@string/text_expense_transaction_type"
+            app:boxBackgroundColor="@color/surface"
+            app:boxCornerRadiusTopEnd="5dp"
+            app:boxCornerRadiusTopStart="5dp"
+            app:errorTextAppearance="@style/ErrorTextAppearance">
+
+            <AutoCompleteTextView
+                android:id="@+id/transaction_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:textSize="14sp"
+                tools:ignore="LabelFor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/transaction_update_expense_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/surface"
+            android:minWidth="120dp"
+            android:text="@string/text_add_expenses"
+            app:cardCornerRadius="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/open_sans_regular"
+                android:padding="15dp"
+                android:text="@string/text_update_expense"
+                android:textSize="14sp" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

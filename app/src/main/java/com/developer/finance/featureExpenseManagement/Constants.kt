@@ -1,4 +1,4 @@
-package com.developer.finance.common
+package com.developer.finance.featureExpenseManagement
 
 object Constants {
 

@@ -1,10 +1,10 @@
-package com.developer.finance.di
+package com.developer.finance.featureExpenseManagement.di
 
 import android.content.Context
 import androidx.room.Room
-import com.developer.finance.data.local.TransactionDatabase
-import com.developer.finance.data.repository.TransactionRepositoryImpl
-import com.developer.finance.domain.repository.TransactionRepository
+import com.developer.finance.featureExpenseManagement.data.local.TransactionDatabase
+import com.developer.finance.featureExpenseManagement.data.repository.TransactionRepositoryImpl
+import com.developer.finance.featureExpenseManagement.domain.repository.TransactionRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-object AppModule {
+object ExpenseManagementAppModule {
 
     @Singleton
     @Provides
@@ -30,7 +30,7 @@ object AppModule {
         return Room.databaseBuilder(
             context,
             TransactionDatabase::class.java,
-            "transaction_management_d7"
+            "transaction_management_d10"
         ).build()
     }
 }

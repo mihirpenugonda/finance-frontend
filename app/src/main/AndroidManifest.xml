@@ -11,10 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Finance">
         <activity
-            android:name=".presentation.allTransactionActivity.AllTransactionActivity"
+            android:name="com.developer.finance.featureExpenseManagement.presentation.transactionActivity.TransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.MainActivity"
+            android:name="com.developer.finance.featureExpenseManagement.presentation.allTransactionActivity.AllTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

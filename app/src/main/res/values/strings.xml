@@ -84,4 +84,5 @@
     <string name="text_friends">friends</string>
     <string name="text_view_all_transaction"><![CDATA[view all transaction >]]></string>
     <string name="text_enter_search">enter search</string>
+    <string name="text_update_expense">update expense</string>
 </resources>

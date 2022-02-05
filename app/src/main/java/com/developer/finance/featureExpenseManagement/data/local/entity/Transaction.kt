@@ -1,4 +1,4 @@
-package com.developer.finance.data.local.entity
+package com.developer.finance.featureExpenseManagement.data.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

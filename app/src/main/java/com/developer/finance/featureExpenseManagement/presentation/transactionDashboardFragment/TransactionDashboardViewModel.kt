@@ -1,8 +1,8 @@
-package com.developer.finance.presentation.expensesFragment
+package com.developer.finance.featureExpenseManagement.presentation.transactionDashboardFragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.developer.finance.domain.repository.TransactionRepository
+import com.developer.finance.featureExpenseManagement.domain.repository.TransactionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class ExpensesViewModel @Inject constructor(
+class TransactionDashboardViewModel @Inject constructor(
     private val expenseRepository: TransactionRepository
 ) : ViewModel() {
 
@@ -19,8 +19,9 @@ class ExpensesViewModel @Inject constructor(
         getExpenses("overall")
     }
 
-    private val _state = MutableStateFlow<ExpensesFragmentEvent>(ExpensesFragmentEvent.Empty)
-    val state: StateFlow<ExpensesFragmentEvent> = _state
+    private val _state =
+        MutableStateFlow<TransactionDashboardFragmentEvent>(TransactionDashboardFragmentEvent.Empty)
+    val state: StateFlow<TransactionDashboardFragmentEvent> = _state
 
     private val _transactionFilter = MutableStateFlow<String>("")
     val transactionFilter: StateFlow<String> = _transactionFilter
@@ -28,9 +29,9 @@ class ExpensesViewModel @Inject constructor(
     fun getExpenses(transactionType: String) {
         expenseRepository.getAllExpensesFlow(transactionType).onEach { result ->
             if (result.isNullOrEmpty()) {
-                _state.value = ExpensesFragmentEvent.Empty
+                _state.value = TransactionDashboardFragmentEvent.Empty
             } else {
-                _state.value = ExpensesFragmentEvent.Success(result)
+                _state.value = TransactionDashboardFragmentEvent.Success(result)
             }
         }.launchIn(viewModelScope)
     }

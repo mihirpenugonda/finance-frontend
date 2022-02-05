@@ -1,4 +1,4 @@
-package com.developer.finance.presentation
+package com.developer.finance
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,9 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.developer.finance.R
 import com.developer.finance.databinding.ActivityMainBinding
-import com.developer.finance.presentation.expensesFragment.ExpensesViewModel
+import com.developer.finance.featureExpenseManagement.presentation.transactionDashboardFragment.TransactionDashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
 
-    private val expensesViewModel: ExpensesViewModel by viewModels()
+    private val expensesViewModel: TransactionDashboardViewModel by viewModels()
 
 
     @SuppressLint("ResourceType")

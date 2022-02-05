@@ -1,5 +1,6 @@
-package com.developer.finance.presentation.allTransactionActivity
+package com.developer.finance.featureExpenseManagement.presentation.allTransactionActivity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,10 +15,13 @@ import androidx.transition.Fade
 import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import com.developer.finance.R
-import com.developer.finance.common.Constants
-import com.developer.finance.data.local.entity.Transaction
+import com.developer.finance.common.DateTimeConverter
 import com.developer.finance.databinding.ActivityAllTransactionsBinding
-import com.developer.finance.presentation.allTransactionActivity.adapter.AllTransactionAdapter
+import com.developer.finance.featureExpenseManagement.Constants
+import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
+import com.developer.finance.featureExpenseManagement.presentation.allTransactionActivity.adapter.AllTransactionAdapter
+import com.developer.finance.featureExpenseManagement.presentation.transactionActivity.TransactionActivity
+import com.developer.finance.presentation.addTransaction.components.DatePickerText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -34,6 +38,8 @@ class AllTransactionActivity : AppCompatActivity() {
     private var categoryFilter = "all"
     private var typeFilter = "overall"
     private var searchFilter = ""
+    private var startDateFilter: Long = 0L
+    private var endDateFilter: Long = 0L
 
     private val viewModelAll: AllTransactionViewModel by viewModels()
 
@@ -43,9 +49,10 @@ class AllTransactionActivity : AppCompatActivity() {
         setContentView(binding.root)
         initViews()
         setupSpinnerListeners()
-        initRv()
         launchEventListener()
         launchSearchListener()
+        launchDateListeners()
+        initRv()
 
         Log.d("When Created", "$categoryFilter $typeFilter")
     }
@@ -53,7 +60,7 @@ class AllTransactionActivity : AppCompatActivity() {
     private fun initViews() {
         binding.transactionFilterViewButton.setOnClickListener {
             val transition: Transition = Fade()
-            transition.duration = 600
+            transition.duration = 50
             transition.addTarget(binding.transactionFilterView)
 
             TransitionManager.beginDelayedTransition(
@@ -69,6 +76,9 @@ class AllTransactionActivity : AppCompatActivity() {
                 filterViewVisible = !filterViewVisible
             }
         }
+
+        DatePickerText(this, binding.startDatePicker)
+        DatePickerText(this, binding.endDatePicker)
     }
 
     private fun setupSpinnerListeners() {
@@ -88,8 +98,14 @@ class AllTransactionActivity : AppCompatActivity() {
                     id: Long
                 ) {
                     categoryFilter = Constants.transactionCategory[position]
-                    Log.d("Category Spinner", "$categoryFilter $typeFilter")
-                    viewModelAll.getExpenses(searchFilter, categoryFilter, typeFilter)
+//                    Log.d("Category Spinner", "$categoryFilter $typeFilter")
+                    viewModelAll.getExpenses(
+                        searchFilter,
+                        categoryFilter,
+                        typeFilter,
+                        startDateFilter,
+                        endDateFilter
+                    )
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -112,7 +128,13 @@ class AllTransactionActivity : AppCompatActivity() {
                     id: Long
                 ) {
                     typeFilter = Constants.transactionTypes[position]
-                    viewModelAll.getExpenses(searchFilter, categoryFilter, typeFilter)
+                    viewModelAll.getExpenses(
+                        searchFilter,
+                        categoryFilter,
+                        typeFilter,
+                        startDateFilter,
+                        endDateFilter
+                    )
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -123,26 +145,73 @@ class AllTransactionActivity : AppCompatActivity() {
         val layoutManager: LinearLayoutManager = LinearLayoutManager(applicationContext)
         binding.transactionsRecyclerView.adapter = adapter
         binding.transactionsRecyclerView.layoutManager = layoutManager
+
+        adapter.setOnItemClickListener { transaction ->
+            val intent = Intent(this, TransactionActivity::class.java)
+            intent.putExtra("transaction_id", transaction.id)
+            startActivity(intent)
+        }
     }
 
-    private fun launchEventListener() =
+    private fun launchEventListener() {
         lifecycleScope.launchWhenStarted {
             viewModelAll.state.collect { event ->
                 when (event) {
-                    is TransactionsFragmentEvent.Empty -> {
+                    is AllTransactionsEvent.Empty -> {
                     }
-                    is TransactionsFragmentEvent.Success -> {
+                    is AllTransactionsEvent.Success -> {
                         updateRv(event.transactions)
                     }
                     else -> {}
                 }
             }
         }
+    }
 
     private fun launchSearchListener() {
         binding.searchInput.doOnTextChanged { text, _, _, _ ->
             searchFilter = text.toString()
-            viewModelAll.getExpenses(searchFilter, categoryFilter, typeFilter)
+            viewModelAll.getExpenses(
+                searchFilter,
+                categoryFilter,
+                typeFilter,
+                startDateFilter,
+                endDateFilter
+            )
+        }
+    }
+
+    // TODO: Finish Date Listeners
+    private fun launchDateListeners() {
+
+        binding.startDatePicker.doOnTextChanged { text, _, _, _ ->
+//            Log.d("startDateFilter", "$startDateFilter $endDateFilter")
+            startDateFilter = DateTimeConverter().formatToMillis(text.toString())
+            if (endDateFilter != 0L) {
+                viewModelAll.getExpenses(
+                    searchFilter,
+                    categoryFilter,
+                    typeFilter,
+                    startDateFilter,
+                    endDateFilter
+                )
+
+            }
+        }
+
+        binding.endDatePicker.doOnTextChanged { text, _, _, _ ->
+//            Log.d("endDateFilter", "$startDateFilter $endDateFilter")
+            endDateFilter =
+                DateTimeConverter().formatToMillis(text.toString()).plus(1000 * 60 * 60 * 24) - 1
+            if (startDateFilter != 0L) {
+                viewModelAll.getExpenses(
+                    searchFilter,
+                    categoryFilter,
+                    typeFilter,
+                    startDateFilter,
+                    endDateFilter
+                )
+            }
         }
     }
 

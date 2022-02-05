@@ -33,6 +33,10 @@
         <item name="shapeAppearanceOverlay">@id/square</item>
     </style>
 
+    <style name="ErrorTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">10sp</item>
+    </style>
+
     <style name="Widget.Theme.Finance.ButtonBar.Fullscreen" parent="">
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>

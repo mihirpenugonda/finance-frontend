@@ -13,8 +13,8 @@
         <entry key="app/src/main/res/drawable/ic_income.xml" value="0.1595" />
         <entry key="app/src/main/res/font/open_sans_regular.xml" value="0.2859375" />
         <entry key="app/src/main/res/font/open_sans_semibold.xml" value="0.2859375" />
-        <entry key="app/src/main/res/layout/activity_add_transaction.xml" value="0.13652482269503546" />
-        <entry key="app/src/main/res/layout/activity_all_transactions.xml" value="0.4656911214192709" />
+        <entry key="app/src/main/res/layout/activity_add_transaction.xml" value="0.13098588226534796" />
+        <entry key="app/src/main/res/layout/activity_all_transactions.xml" value="0.295864262990456" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_transaction.xml" value="0.37003597555178563" />
         <entry key="app/src/main/res/layout/add_expense_category_dropdown_item.xml" value="0.13652482269503546" />
@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_add_splits.xml" value="0.23617401123046877" />
         <entry key="app/src/main/res/layout/fragment_add_splits_tab.xml" value="0.23641304347826086" />
         <entry key="app/src/main/res/layout/fragment_expenses.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_expenses_dashboard.xml" value="0.2504528985507246" />
         <entry key="app/src/main/res/layout/fragment_expenses_empty_layout.xml" value="0.2504528985507246" />
         <entry key="app/src/main/res/layout/fragment_friends.xml" value="0.2141473010577987" />
         <entry key="app/src/main/res/layout/fragment_group.xml" value="0.19248352050781253" />

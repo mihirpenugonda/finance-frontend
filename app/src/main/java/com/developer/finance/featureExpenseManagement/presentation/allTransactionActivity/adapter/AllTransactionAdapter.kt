@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.allTransactionActivity.adapter
+package com.developer.finance.featureExpenseManagement.presentation.allTransactionActivity.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.finance.R
 import com.developer.finance.common.DateTimeConverter
-import com.developer.finance.data.local.entity.Transaction
 import com.developer.finance.databinding.RvExpenseItemBinding
-import com.developer.finance.presentation.expensesFragment.adapter.AllTransactionDiffUtil
+import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
+import com.developer.finance.featureExpenseManagement.presentation.transactionDashboardFragment.adapter.AllTransactionDiffUtil
 
 class AllTransactionAdapter : RecyclerView.Adapter<AllTransactionAdapter.TransactionViewHolder>() {
 

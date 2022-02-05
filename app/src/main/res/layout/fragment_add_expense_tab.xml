@@ -24,74 +24,83 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nameExpenseParent"
+                android:id="@+id/name_expense_parent"
                 style="@style/PrimaryEditText"
                 android:layout_width="300dp"
-                android:layout_height="75dp"
+                android:layout_height="70dp"
+                app:errorTextAppearance="@style/ErrorTextAppearance"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_title">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nameExpense"
+                    android:id="@+id/name_expense"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/descriptionExpenseParent"
+                android:id="@+id/description_expense_parent"
                 style="@style/PrimaryEditText"
                 android:layout_width="300dp"
-                android:layout_height="75dp"
+                android:layout_height="70dp"
+                app:errorTextAppearance="@style/ErrorTextAppearance"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_description">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/descriptionExpense"
+                    android:id="@+id/description_expense"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/amountExpenseParent"
+                android:id="@+id/amount_expense_parent"
                 style="@style/PrimaryEditText"
                 android:layout_width="300dp"
-                android:layout_height="75dp"
                 android:layout_gravity="center"
+                android:layout_height="70dp"
+                app:errorTextAppearance="@style/ErrorTextAppearance"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_expense_amount">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/amountExpense"
+                    android:id="@+id/amount_expense"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/datePickerParent"
+                android:id="@+id/date_picker_parent"
                 style="@style/PrimaryEditText"
                 android:layout_width="300dp"
-                android:layout_height="75dp"
                 android:layout_gravity="center"
+                android:layout_height="70dp"
+                app:errorTextAppearance="@style/ErrorTextAppearance"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_date">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/datePicker"
+                    android:id="@+id/date_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:cursorVisible="false"
+                    android:textSize="14sp"
                     android:focusable="false"
                     android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/categoryPickerParent"
+                android:id="@+id/category_picker_parent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="300dp"
-                android:layout_height="75dp"
                 android:layout_gravity="center"
+                android:layout_height="70dp"
+                app:errorTextAppearance="@style/ErrorTextAppearance"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_category"
                 app:boxBackgroundColor="@color/surface"
@@ -99,31 +108,33 @@
                 app:boxCornerRadiusTopStart="5dp">
 
                 <AutoCompleteTextView
-                    android:id="@+id/categoryPicker"
+                    android:id="@+id/category_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="14sp"
                     android:inputType="none"
                     tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/typePickerParent"
+                android:id="@+id/type_picker_parent"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="300dp"
-                android:layout_height="75dp"
                 android:layout_gravity="center"
+                android:layout_height="70dp"
+                app:errorTextAppearance="@style/ErrorTextAppearance"
                 android:layout_marginTop="5dp"
                 android:hint="@string/text_expense_transaction_type"
                 app:boxBackgroundColor="@color/surface"
                 app:boxCornerRadiusTopEnd="5dp"
-
                 app:boxCornerRadiusTopStart="5dp">
 
                 <AutoCompleteTextView
-                    android:id="@+id/typePicker"
+                    android:id="@+id/type_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="14sp"
                     android:inputType="none"
                     tools:ignore="LabelFor" />
 
