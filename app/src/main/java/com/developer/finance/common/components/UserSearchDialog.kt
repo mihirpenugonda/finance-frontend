@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.addTransaction.components
+package com.developer.finance.common.components
 
 import android.content.Context
 import android.util.AttributeSet
@@ -44,7 +44,7 @@ class UserSearchDialog : ConstraintLayout {
     }
 
     private fun createNewChip(chipText: String) {
-        var newChip = Chip(context);
+        var newChip = Chip(context)
         newChip.text = chipText
         newChip.setOnCloseIconClickListener {
             var index = chipListUser.indexOf(chipText)
@@ -69,12 +69,11 @@ class UserSearchDialog : ConstraintLayout {
         }
     }
 
-    public fun getSelectedUsers(): MutableList<String> {
+    fun getSelectedUsers(): MutableList<String> {
         return chipListUser
     }
 
-    interface UserSearchDialogListeners {
-    }
+    interface UserSearchDialogListeners
 
 }
 

@@ -16,20 +16,20 @@ import com.developer.finance.R
 import com.developer.finance.common.base.BaseFragment
 import com.developer.finance.databinding.FragmentExpensesDashboardBinding
 import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
+import com.developer.finance.featureExpenseManagement.presentation.ExpenseViewModel
 import kotlinx.coroutines.flow.collect
 
 
 class TransactionDashboardFragment : BaseFragment<FragmentExpensesDashboardBinding>() {
 
-    val viewModel: TransactionDashboardViewModel by activityViewModels<TransactionDashboardViewModel>()
+    val viewModel: ExpenseViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getDashboardExpenses("overall")
         initViews()
-//        initRv()
         launchExpenseListener()
         launchFilterListener()
-
     }
 
     private fun initViews() {
@@ -53,22 +53,22 @@ class TransactionDashboardFragment : BaseFragment<FragmentExpensesDashboardBindi
             ) {
                 when (position) {
                     0 -> {
-                        viewModel.setOverall()
+                        viewModel.setFilter("overall")
                         overallMode()
                     }
                     1 -> {
-                        viewModel.setIncome()
+                        viewModel.setFilter("income")
                         incomeMode()
                     }
                     2 -> {
-                        viewModel.setExpense()
+                        viewModel.setFilter("expense")
                         expenseMode()
                     }
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                viewModel.setOverall()
+                viewModel.getDashboardExpenses("overall")
             }
         }
 
@@ -80,22 +80,22 @@ class TransactionDashboardFragment : BaseFragment<FragmentExpensesDashboardBindi
 
     private fun launchFilterListener() {
         lifecycleScope.launchWhenStarted {
-            viewModel.transactionFilter.collect { filter ->
-                viewModel.getExpenses(filter)
+            viewModel.dashboardFilter.collect { filter ->
+                viewModel.getDashboardExpenses(filter)
             }
         }
     }
 
     private fun launchExpenseListener() =
         lifecycleScope.launchWhenStarted {
-            viewModel.state.collect { event ->
+            viewModel.dashboardState.collect { event ->
                 when (event) {
-                    is TransactionDashboardFragmentEvent.Empty -> {
-                        emptyMode()
-                    }
                     is TransactionDashboardFragmentEvent.Success -> {
                         calculateTotalIncomeExpense(event.expenses)
                         displayMode()
+                    }
+                    is TransactionDashboardFragmentEvent.Empty -> {
+                        emptyMode()
                     }
                     else -> {}
                 }
@@ -114,13 +114,13 @@ class TransactionDashboardFragment : BaseFragment<FragmentExpensesDashboardBindi
             balance *= -1; "-₹$balance"
         } else "+₹$balance"
         binding.totalIncomeCardView.textTotalIncomeAmount.text =
-            if (viewModel.transactionFilter.value == "expense") {
+            if (viewModel.dashboardFilter.value == "expense") {
                 "0"
             } else {
                 "+₹$income"
             }
         binding.totalExpenseCardView.textTotalExpenseAmount.text =
-            if (viewModel.transactionFilter.value == "income") {
+            if (viewModel.dashboardFilter.value == "income") {
                 "0"
             } else {
                 "-₹$expense"
@@ -173,10 +173,5 @@ class TransactionDashboardFragment : BaseFragment<FragmentExpensesDashboardBindi
         } else {
             AnimationUtils.loadAnimation(context, R.anim.empty_anim)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getExpenses("overall")
     }
 }

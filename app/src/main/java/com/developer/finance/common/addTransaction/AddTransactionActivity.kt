@@ -1,11 +1,11 @@
-package com.developer.finance.presentation.addTransaction
+package com.developer.finance.common.addTransaction
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.developer.finance.R
 import com.developer.finance.databinding.ActivityAddTransactionBinding
-import com.developer.finance.presentation.addTransaction.addExpense.AddExpenseFragment
-import com.developer.finance.presentation.addTransaction.addSplits.AddSplitsFragment
+import com.developer.finance.featureBillSplitting.presentation.addSplits.AddSplitsFragment
+import com.developer.finance.featureExpenseManagement.presentation.addExpense.AddExpenseFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 

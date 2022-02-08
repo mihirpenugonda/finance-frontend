@@ -3,22 +3,24 @@ package com.developer.finance.featureExpenseManagement.presentation.allTransacti
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.developer.finance.R
 import com.developer.finance.common.DateTimeConverter
 import com.developer.finance.databinding.RvExpenseItemBinding
 import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
-import com.developer.finance.featureExpenseManagement.presentation.transactionDashboardFragment.adapter.AllTransactionDiffUtil
 
 class AllTransactionAdapter : RecyclerView.Adapter<AllTransactionAdapter.TransactionViewHolder>() {
 
-    private var oldExpenseList: List<Transaction> = emptyList()
+    var expenseList: List<Transaction>
+        get() = differ.currentList
+        set(value) {
+            differ.submitList(value)
+        }
 
     inner class TransactionViewHolder(val binding: RvExpenseItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-    }
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -37,7 +39,7 @@ class AllTransactionAdapter : RecyclerView.Adapter<AllTransactionAdapter.Transac
         holder: AllTransactionAdapter.TransactionViewHolder,
         position: Int
     ) {
-        val expense = oldExpenseList[position]
+        val expense = expenseList[position]
         with(holder.binding) {
             expenseName.text = expense.title
             expenseDate.text = DateTimeConverter().format(expense.date)
@@ -106,7 +108,7 @@ class AllTransactionAdapter : RecyclerView.Adapter<AllTransactionAdapter.Transac
     }
 
     override fun getItemCount(): Int {
-        return oldExpenseList.size
+        return expenseList.size
     }
 
     private var onItemClickListener: ((Transaction) -> Unit)? = null
@@ -114,11 +116,16 @@ class AllTransactionAdapter : RecyclerView.Adapter<AllTransactionAdapter.Transac
         onItemClickListener = listener
     }
 
-    fun setData(newExpenseList: List<Transaction>) {
-        val diffUtil = AllTransactionDiffUtil(oldExpenseList, newExpenseList)
-        val diffResults = DiffUtil.calculateDiff(diffUtil)
-        oldExpenseList = newExpenseList
-        diffResults.dispatchUpdatesTo(this)
+    private val diffCallback = object : DiffUtil.ItemCallback<Transaction>() {
+        override fun areItemsTheSame(oldItem: Transaction, newItem: Transaction): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Transaction, newItem: Transaction): Boolean {
+            return oldItem == newItem
+        }
+
     }
+    private val differ = AsyncListDiffer(this, diffCallback)
 
 }

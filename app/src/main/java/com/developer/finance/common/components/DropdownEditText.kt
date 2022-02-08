@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.addTransaction.components
+package com.developer.finance.common.components
 
 import android.content.Context
 import android.text.Editable
@@ -40,7 +40,7 @@ class DropdownEditText(context: Context, attrs: AttributeSet?) : androidx.appcom
                     // Change focus to another EditText
                     clearFocus()
                     // Change flag to default
-                    mEnterOccurred = false;
+                    mEnterOccurred = false
                 }
             }
         }

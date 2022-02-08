@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.addTransaction.addExpense
+package com.developer.finance.featureExpenseManagement.presentation.addExpense
 
 import android.os.Bundle
 import android.util.Log
@@ -10,12 +10,12 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.developer.finance.R
+import com.developer.finance.common.addTransaction.AddTransactionViewModel
 import com.developer.finance.common.base.BaseFragment
+import com.developer.finance.common.components.DatePickerText
 import com.developer.finance.databinding.FragmentAddExpenseTabBinding
 import com.developer.finance.featureExpenseManagement.Constants
 import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
-import com.developer.finance.presentation.addTransaction.AddTransactionViewModel
-import com.developer.finance.presentation.addTransaction.components.DatePickerText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat

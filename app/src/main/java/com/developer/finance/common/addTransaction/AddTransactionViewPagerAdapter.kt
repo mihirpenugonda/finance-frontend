@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.addTransaction
+package com.developer.finance.common.addTransaction
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -19,7 +19,7 @@ class AddTransactionViewPagerAdapter(fragmentManager: FragmentManager, lifecycle
         return fragmentArrayList[position]
     }
 
-    public fun addFragment(fragment: Fragment, title: String) {
+    fun addFragment(fragment: Fragment, title: String) {
         fragmentArrayList.add(fragment)
         fragmentTitle.add(title)
     }

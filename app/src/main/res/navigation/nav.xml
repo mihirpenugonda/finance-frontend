@@ -6,7 +6,7 @@
     app:startDestination="@id/fragment_friends">
     <fragment
         android:id="@+id/fragment_friends"
-        android:name="com.developer.finance.presentation.friendsFragment.FriendsFragment"
+        android:name="com.developer.finance.featureBillSplitting.presentation.friendsFragment.FriendsFragment"
         android:label="FriendsFragment"
         tools:layout="@layout/fragment_friends" />
     <fragment
@@ -20,7 +20,7 @@
     </fragment>
     <activity
         android:id="@+id/add_transaction_activity"
-        android:name="com.developer.finance.presentation.addTransaction.AddTransactionActivity"
+        android:name="com.developer.finance.common.addTransaction.AddTransactionActivity"
         android:label="AddTransactionActivity" />
     <activity
         android:id="@+id/transactionActivity"

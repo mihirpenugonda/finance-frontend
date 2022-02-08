@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.addTransaction
+package com.developer.finance.common.addTransaction
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

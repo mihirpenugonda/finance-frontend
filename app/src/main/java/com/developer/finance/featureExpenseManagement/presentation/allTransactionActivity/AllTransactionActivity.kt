@@ -2,7 +2,6 @@ package com.developer.finance.featureExpenseManagement.presentation.allTransacti
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -16,12 +15,13 @@ import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import com.developer.finance.R
 import com.developer.finance.common.DateTimeConverter
+import com.developer.finance.common.components.DatePickerText
 import com.developer.finance.databinding.ActivityAllTransactionsBinding
 import com.developer.finance.featureExpenseManagement.Constants
 import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
+import com.developer.finance.featureExpenseManagement.presentation.ExpenseViewModel
 import com.developer.finance.featureExpenseManagement.presentation.allTransactionActivity.adapter.AllTransactionAdapter
 import com.developer.finance.featureExpenseManagement.presentation.transactionActivity.TransactionActivity
-import com.developer.finance.presentation.addTransaction.components.DatePickerText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.collect
 class AllTransactionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAllTransactionsBinding
+
     private val adapter by lazy {
         AllTransactionAdapter()
     }
@@ -41,7 +42,7 @@ class AllTransactionActivity : AppCompatActivity() {
     private var startDateFilter: Long = 0L
     private var endDateFilter: Long = 0L
 
-    private val viewModelAll: AllTransactionViewModel by viewModels()
+    private val allTransactionViewModel: ExpenseViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +54,6 @@ class AllTransactionActivity : AppCompatActivity() {
         launchSearchListener()
         launchDateListeners()
         initRv()
-
-        Log.d("When Created", "$categoryFilter $typeFilter")
     }
 
     private fun initViews() {
@@ -99,7 +98,7 @@ class AllTransactionActivity : AppCompatActivity() {
                 ) {
                     categoryFilter = Constants.transactionCategory[position]
 //                    Log.d("Category Spinner", "$categoryFilter $typeFilter")
-                    viewModelAll.getExpenses(
+                    allTransactionViewModel.getFilterTransactions(
                         searchFilter,
                         categoryFilter,
                         typeFilter,
@@ -128,7 +127,7 @@ class AllTransactionActivity : AppCompatActivity() {
                     id: Long
                 ) {
                     typeFilter = Constants.transactionTypes[position]
-                    viewModelAll.getExpenses(
+                    allTransactionViewModel.getFilterTransactions(
                         searchFilter,
                         categoryFilter,
                         typeFilter,
@@ -150,12 +149,13 @@ class AllTransactionActivity : AppCompatActivity() {
             val intent = Intent(this, TransactionActivity::class.java)
             intent.putExtra("transaction_id", transaction.id)
             startActivity(intent)
+            finish()
         }
     }
 
     private fun launchEventListener() {
         lifecycleScope.launchWhenStarted {
-            viewModelAll.state.collect { event ->
+            allTransactionViewModel.allTransactionsState.collect { event ->
                 when (event) {
                     is AllTransactionsEvent.Empty -> {
                     }
@@ -171,7 +171,7 @@ class AllTransactionActivity : AppCompatActivity() {
     private fun launchSearchListener() {
         binding.searchInput.doOnTextChanged { text, _, _, _ ->
             searchFilter = text.toString()
-            viewModelAll.getExpenses(
+            allTransactionViewModel.getFilterTransactions(
                 searchFilter,
                 categoryFilter,
                 typeFilter,
@@ -188,7 +188,7 @@ class AllTransactionActivity : AppCompatActivity() {
 //            Log.d("startDateFilter", "$startDateFilter $endDateFilter")
             startDateFilter = DateTimeConverter().formatToMillis(text.toString())
             if (endDateFilter != 0L) {
-                viewModelAll.getExpenses(
+                allTransactionViewModel.getFilterTransactions(
                     searchFilter,
                     categoryFilter,
                     typeFilter,
@@ -204,7 +204,7 @@ class AllTransactionActivity : AppCompatActivity() {
             endDateFilter =
                 DateTimeConverter().formatToMillis(text.toString()).plus(1000 * 60 * 60 * 24) - 1
             if (startDateFilter != 0L) {
-                viewModelAll.getExpenses(
+                allTransactionViewModel.getFilterTransactions(
                     searchFilter,
                     categoryFilter,
                     typeFilter,
@@ -216,6 +216,11 @@ class AllTransactionActivity : AppCompatActivity() {
     }
 
     private fun updateRv(newExpenses: List<Transaction>) {
-        adapter.setData(newExpenses)
+        adapter.expenseList = newExpenses
+    }
+
+    override fun onResume() {
+        super.onResume()
+        allTransactionViewModel.getAllTransactions()
     }
 }

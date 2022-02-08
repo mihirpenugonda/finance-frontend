@@ -1,4 +1,4 @@
-package com.developer.finance.presentation.friendsFragment
+package com.developer.finance.featureBillSplitting.presentation.friendsFragment
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

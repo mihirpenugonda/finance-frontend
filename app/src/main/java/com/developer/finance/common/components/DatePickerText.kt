@@ -1,11 +1,9 @@
-package com.developer.finance.presentation.addTransaction.components
+package com.developer.finance.common.components
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.view.View
 import android.widget.DatePicker
-import android.widget.EditText
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.*

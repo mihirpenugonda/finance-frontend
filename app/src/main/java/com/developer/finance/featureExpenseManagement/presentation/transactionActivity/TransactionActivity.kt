@@ -1,13 +1,20 @@
 package com.developer.finance.featureExpenseManagement.presentation.transactionActivity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.developer.finance.R
 import com.developer.finance.common.DateTimeConverter
+import com.developer.finance.common.components.DatePickerText
 import com.developer.finance.databinding.ActivityTransactionBinding
+import com.developer.finance.featureExpenseManagement.Constants
 import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
+import com.developer.finance.featureExpenseManagement.presentation.ExpenseViewModel
+import com.developer.finance.featureExpenseManagement.presentation.allTransactionActivity.AllTransactionActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -17,7 +24,7 @@ class TransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTransactionBinding
     private var transactionId = 0
 
-    private val transactionViewModel: TransactionViewModel by viewModels()
+    private val transactionViewModel: ExpenseViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +37,25 @@ class TransactionActivity : AppCompatActivity() {
     private fun initViews() {
         transactionId = intent.getIntExtra("transaction_id", 0)
         transactionViewModel.setTransactionId(transactionId)
+
+        Log.d("Categories", Constants.transactionCategory.toString())
+
+        val categoryAdapter: ArrayAdapter<String> = ArrayAdapter(
+            this,
+            R.layout.dropdown_item,
+            Constants.transactionCategory.filter { it != "all" }
+        )
+
+        val typeAdapter: ArrayAdapter<String> = ArrayAdapter(
+            this,
+            R.layout.dropdown_item,
+            Constants.transactionTypes.filter { it != "overall" }
+        )
+
+        DatePickerText(this, binding.transactionDatePicker)
+
+        binding.transactionCategory.setAdapter(categoryAdapter)
+        binding.transactionType.setAdapter(typeAdapter)
 
         binding.transactionUpdateExpenseButton.setOnClickListener {
             transactionViewModel.updateExpense(
@@ -46,11 +72,18 @@ class TransactionActivity : AppCompatActivity() {
             )
             finish()
         }
+
+        binding.transactionDeleteExpenseButton.setOnClickListener {
+            transactionViewModel.deleteExpense(transactionId)
+            val intent = Intent(this, AllTransactionActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun launchEventListener() {
         lifecycleScope.launchWhenStarted {
-            transactionViewModel.state.collect { event ->
+            transactionViewModel.transactionState.collect { event ->
                 when (event) {
                     is TransactionEvent.Empty -> Log.d(
                         "TransactionEvent:",
