@@ -52,10 +52,17 @@ class TransactionActivity : AppCompatActivity() {
             Constants.transactionTypes.filter { it != "overall" }
         )
 
+        val frequencyAdapter: ArrayAdapter<String> = ArrayAdapter(
+            this,
+            R.layout.dropdown_item,
+            Constants.transactionFrequency
+        )
+
         DatePickerText(this, binding.transactionDatePicker)
 
         binding.transactionCategory.setAdapter(categoryAdapter)
         binding.transactionType.setAdapter(typeAdapter)
+        binding.transactionFrequency.setAdapter(frequencyAdapter)
 
         binding.transactionUpdateExpenseButton.setOnClickListener {
             transactionViewModel.updateExpense(
@@ -66,6 +73,7 @@ class TransactionActivity : AppCompatActivity() {
                     DateTimeConverter().formatToMillis(binding.transactionDatePicker.text.toString()),
                     binding.transactionCategory.text.toString(),
                     binding.transactionType.text.toString(),
+                    binding.transactionFrequency.text.toString(),
                     System.currentTimeMillis(),
                     transactionId
                 )
@@ -96,6 +104,7 @@ class TransactionActivity : AppCompatActivity() {
                         binding.transactionCategory.setText(event.transaction.category)
                         binding.transactionDatePicker.setText(DateTimeConverter().format(event.transaction.date))
                         binding.transactionType.setText(event.transaction.type)
+                        binding.transactionFrequency.setText(event.transaction.frequency)
                     }
                     else -> {}
                 }

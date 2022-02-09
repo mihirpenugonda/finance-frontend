@@ -95,7 +95,9 @@ class TransactionDashboardFragment : BaseFragment<FragmentExpensesDashboardBindi
                         displayMode()
                     }
                     is TransactionDashboardFragmentEvent.Empty -> {
-                        emptyMode()
+                        binding.totalBalanceCardView.textTotalBalanceAmount.text = "0"
+                        binding.totalExpenseCardView.textTotalExpenseAmount.text = "0"
+                        binding.totalIncomeCardView.textTotalIncomeAmount.text = "0"
                     }
                     else -> {}
                 }
@@ -173,5 +175,10 @@ class TransactionDashboardFragment : BaseFragment<FragmentExpensesDashboardBindi
         } else {
             AnimationUtils.loadAnimation(context, R.anim.empty_anim)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getDashboardExpenses("overall")
     }
 }

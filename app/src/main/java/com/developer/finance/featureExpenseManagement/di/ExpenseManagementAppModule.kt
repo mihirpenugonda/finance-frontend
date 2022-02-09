@@ -21,7 +21,7 @@ object ExpenseManagementAppModule {
     fun providesExpenseRepository(
         db: TransactionDatabase
     ): TransactionRepository {
-        return TransactionRepositoryImpl(db.expenseDao)
+        return TransactionRepositoryImpl(db.transactionsDao, db.recurringTransactionsDao)
     }
 
     @Singleton
@@ -30,7 +30,7 @@ object ExpenseManagementAppModule {
         return Room.databaseBuilder(
             context,
             TransactionDatabase::class.java,
-            "transaction_management_d10"
+            "transaction_management11"
         ).build()
     }
 }

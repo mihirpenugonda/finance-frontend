@@ -21,4 +21,11 @@ object Constants {
         "entertainment",
         "miscellaneous"
     )
+
+    val transactionFrequency = listOf(
+        "none",
+        "everyday",
+        "every week",
+        "every month"
+    )
 }

@@ -7,18 +7,17 @@ data class UserDto(
     val _id: String,
     val avatar: AvatarDto,
     val email: String,
-    val joined_date: String,
+    val joining_date: String,
     val name: String,
     val role: String,
     val username: String
-) {
-    fun toUserModel(): User {
-        return User(
-            email,
-            joined_date,
-            name,
-            username,
-            avatar.url
-        )
-    }
+)
+
+fun UserDto.toUserModel(): User {
+    return User(
+        email,
+        joining_date,
+        name,
+        username,
+    )
 }

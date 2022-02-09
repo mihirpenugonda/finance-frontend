@@ -5,5 +5,4 @@ data class User(
     val joined_date: String,
     val name: String,
     val username: String,
-    val avatar_url: String,
 )

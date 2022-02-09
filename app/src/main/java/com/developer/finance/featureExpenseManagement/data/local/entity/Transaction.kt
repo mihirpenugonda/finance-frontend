@@ -13,10 +13,9 @@ data class Transaction(
     @ColumnInfo(name = "date") var date: Long,
     @ColumnInfo(name = "category") var category: String,
     @ColumnInfo(name = "type") var type: String,
+    @ColumnInfo(name = "frequency") var frequency: String = "none",
     @ColumnInfo(name = "created_at") var created_at: Long = System.currentTimeMillis(),
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "e_id")
+    @ColumnInfo(name = "t_id")
     var id: Int = 0,
-) : Serializable {
-
-}
+) : Serializable

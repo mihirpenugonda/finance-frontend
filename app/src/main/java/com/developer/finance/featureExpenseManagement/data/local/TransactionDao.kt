@@ -10,12 +10,12 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TransactionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertExpense(expense: Transaction)
+    suspend fun insertExpense(expense: Transaction): Long
 
-    @Query("DELETE FROM `transaction` WHERE e_id IN (:id)")
+    @Query("DELETE FROM `transaction` WHERE t_id IN (:id)")
     suspend fun deleteExpense(id: Int)
 
-    @Query("SELECT * FROM `transaction` WHERE  e_id IN (:id)")
+    @Query("SELECT * FROM `transaction` WHERE  t_id IN (:id)")
     suspend fun getExpenseById(id: Int): Transaction?
 
     @Query("SELECT * FROM `transaction` WHERE title LIKE '%'||:search||'%' OR description LIKE '%'||:search||'%' ORDER BY date DESC")

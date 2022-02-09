@@ -68,6 +68,13 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseTabBinding>() {
         )
         binding.typePicker.setAdapter(typeAdapter)
 
+        val frequencyAdapter: ArrayAdapter<String> = ArrayAdapter(
+            requireContext(),
+            R.layout.dropdown_item,
+            Constants.transactionFrequency
+        )
+        binding.frequencyPicker.setAdapter(frequencyAdapter)
+
         val listOfElements = listOf(
             binding.nameExpense,
             binding.descriptionExpense,
@@ -100,7 +107,8 @@ class AddExpenseFragment : BaseFragment<FragmentAddExpenseTabBinding>() {
             binding.amountExpense.text.toString(),
             date,
             binding.categoryPicker.text.toString(),
-            binding.typePicker.text.toString()
+            binding.typePicker.text.toString(),
+            binding.frequencyPicker.text.toString()
         )
 
         var isValidated = true
