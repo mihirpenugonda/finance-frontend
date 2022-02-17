@@ -13,10 +13,10 @@ interface TransactionDao {
     suspend fun insertExpense(expense: Transaction): Long
 
     @Query("DELETE FROM `transaction` WHERE t_id IN (:id)")
-    suspend fun deleteExpense(id: Int)
+    suspend fun deleteExpense(id: kotlin.Int)
 
     @Query("SELECT * FROM `transaction` WHERE  t_id IN (:id)")
-    suspend fun getExpenseById(id: Int): Transaction?
+    suspend fun getExpenseById(id: Long): Transaction?
 
     @Query("SELECT * FROM `transaction` WHERE title LIKE '%'||:search||'%' OR description LIKE '%'||:search||'%' ORDER BY date DESC")
     suspend fun getQueryExpenses(search: String): List<Transaction>

@@ -28,4 +28,11 @@ object Constants {
         "every week",
         "every month"
     )
+
+    val transactionFrequencyToMillis = mapOf(
+        "none" to 0,
+        "everyday" to 86400000,
+        "every week" to 604800000,
+        "every month" to 2628000000
+    )
 }

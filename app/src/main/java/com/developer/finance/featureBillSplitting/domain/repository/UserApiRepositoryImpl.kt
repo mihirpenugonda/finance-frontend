@@ -18,7 +18,10 @@ class UserApiRepositoryImpl @Inject constructor(
     }
 
     override suspend fun loginUser(username: String, password: String): LoginRegisterResponseDto {
-        return userApi.loginUser(username, password)
+        val loginBodyItem = HashMap<String, String>()
+        loginBodyItem["username"] = username
+        loginBodyItem["password"] = password
+        return userApi.loginUser(loginBodyItem)
     }
 
     override suspend fun registerUser(
@@ -27,6 +30,12 @@ class UserApiRepositoryImpl @Inject constructor(
         email: String,
         password: String
     ): LoginRegisterResponseDto {
-        return userApi.registerUser(name, username, email, password)
+        val registerBodyItem = HashMap<String, String>()
+        registerBodyItem["username"] = username
+        registerBodyItem["password"] = password
+        registerBodyItem["email"] = email
+        registerBodyItem["name"] = name
+        return userApi.registerUser(registerBodyItem)
+
     }
 }

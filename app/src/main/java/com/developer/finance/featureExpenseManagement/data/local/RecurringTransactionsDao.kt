@@ -12,7 +12,12 @@ interface RecurringTransactionsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecurringTransaction(expense: RecurringTransactions)
 
-    @Query("DELETE FROM `recurringtransactions` WHERE t_id IN (:id)")
-    suspend fun deleteRecurringTransaction(id: Long)
+    @Query("DELETE FROM recurringtransactions WHERE t_id IN (:id)")
+    suspend fun deleteRecurringTransaction(id: kotlin.Int)
 
+    @Query("SELECT * FROM recurringtransactions WHERE t_id IN (:id)")
+    suspend fun getRecurringTransactionById(id: Long): RecurringTransactions
+
+    @Query("SELECT * FROM recurringtransactions")
+    suspend fun getRecurringTransactions(): List<RecurringTransactions>
 }

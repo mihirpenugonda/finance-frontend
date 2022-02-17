@@ -1,4 +1,4 @@
-package com.developer.finance.featureBillSplitting.domain.usecases
+package com.developer.finance.featureBillSplitting.domain.usecases.users
 
 import android.util.Log
 import com.developer.finance.featureBillSplitting.data.local.User
@@ -10,18 +10,18 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetAllUsersUsecase @Inject constructor(
+class GetUserByIdUsecase @Inject constructor(
     private val userApiRepository: UserApiRepository
 ) {
-    operator fun invoke(): Flow<List<User>> = flow {
+    operator fun invoke(id: String): Flow<User> = flow {
         try {
-            val coins = userApiRepository.getAllUsers()
-            Log.d("UserApiRepo AllUsrs: ", coins.toString())
-            emit(coins.users.map { it.toUserModel() })
+            val response = userApiRepository.getUser(id)
+            Log.d("finduserbyid usecase: ", response.toString())
+            response.users?.map { it.toUserModel() }?.let { emit(it[0]) }
         } catch (e: IOException) {
-            Log.d("getallusers Usecase:", e.toString())
+            Log.d("finduserbyid usecase: ", e.toString())
         } catch (e: HttpException) {
-            Log.d("getallusers usecase:", "device not connected to internet")
+            Log.d("finduserbyid usecase: ", "device not connected to internet")
         }
     }
 }

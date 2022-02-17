@@ -1,31 +1,43 @@
 package com.developer.finance.featureExpenseManagement.services
 
 import android.app.job.JobInfo
+import android.app.job.JobParameters
 import android.app.job.JobScheduler
-import android.app.job.JobWorkItem
+import android.app.job.JobService
+import android.content.ComponentName
+import android.util.Log
+import com.developer.finance.featureExpenseManagement.domain.repository.TransactionRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class testService : JobScheduler() {
-    override fun schedule(job: JobInfo): Int {
-        TODO("Not yet implemented")
+class TestService @Inject constructor(
+    private val transactionRepository: TransactionRepository
+) : JobService() {
+
+    override fun onStartJob(params: JobParameters?): Boolean {
+        doJob()
+        doService()
+        return true
     }
 
-    override fun enqueue(job: JobInfo, work: JobWorkItem): Int {
-        TODO("Not yet implemented")
+    private fun doService() {
+        var jobScheduler = getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
+        var builder = JobInfo.Builder(1, ComponentName(this, TestService::class.java))
+        jobScheduler.schedule(builder.build())
     }
 
-    override fun cancel(jobId: Int) {
-        TODO("Not yet implemented")
+
+    private fun doJob() {
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.d("RT Job: ", "Service is currently Running")
+            transactionRepository.testFunctionForService()
+        }
     }
 
-    override fun cancelAll() {
-        TODO("Not yet implemented")
+    override fun onStopJob(params: JobParameters?): Boolean {
+        return false
     }
 
-    override fun getAllPendingJobs(): MutableList<JobInfo> {
-        TODO("Not yet implemented")
-    }
-
-    override fun getPendingJob(jobId: Int): JobInfo? {
-        TODO("Not yet implemented")
-    }
 }

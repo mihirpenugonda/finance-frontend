@@ -8,6 +8,7 @@ import java.io.Serializable
 @Entity
 data class RecurringTransactions(
     @ColumnInfo(name = "frequency") var frequency: String,
+    @ColumnInfo(name = "next_run") var nextRun: Long,
     @ColumnInfo(name = "t_id")
     @PrimaryKey()
     val id: Long = 0

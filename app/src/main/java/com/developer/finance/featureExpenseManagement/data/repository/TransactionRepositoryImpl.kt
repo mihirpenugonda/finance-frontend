@@ -1,11 +1,16 @@
 package com.developer.finance.featureExpenseManagement.data.repository
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.developer.finance.featureExpenseManagement.Constants
 import com.developer.finance.featureExpenseManagement.data.local.RecurringTransactionsDao
 import com.developer.finance.featureExpenseManagement.data.local.TransactionDao
 import com.developer.finance.featureExpenseManagement.data.local.entity.RecurringTransactions
 import com.developer.finance.featureExpenseManagement.data.local.entity.Transaction
 import com.developer.finance.featureExpenseManagement.domain.repository.TransactionRepository
 import kotlinx.coroutines.flow.Flow
+import java.time.LocalDate
+import java.time.ZoneOffset
 
 class TransactionRepositoryImpl(
     private val transactionDao: TransactionDao,
@@ -17,6 +22,7 @@ class TransactionRepositoryImpl(
             recurringTransactionsDao.insertRecurringTransaction(
                 RecurringTransactions(
                     expense.frequency,
+                    System.currentTimeMillis() + Constants.transactionFrequencyToMillis[expense.frequency]!!,
                     t_id
                 )
             )
@@ -25,6 +31,7 @@ class TransactionRepositoryImpl(
 
     override suspend fun deleteExpense(id: Int) {
         transactionDao.deleteExpense(id)
+        recurringTransactionsDao.deleteRecurringTransaction(id)
     }
 
     override fun getAllExpensesFlow(transactionType: String): Flow<List<Transaction>> {
@@ -49,7 +56,27 @@ class TransactionRepositoryImpl(
     }
 
     override suspend fun getExpenseById(id: Int): Transaction? {
-        return transactionDao.getExpenseById(id)
+        return transactionDao.getExpenseById(id.toLong())
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override suspend fun testFunctionForService() {
+        val allRecurrenceTransactions = recurringTransactionsDao.getRecurringTransactions()
+
+        allRecurrenceTransactions.forEach { recurrence ->
+            val transaction = transactionDao.getExpenseById(recurrence.id)
+
+            transaction!!.id = 0
+            transaction.date =
+                LocalDate.now().atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
+            transaction.created_at = System.currentTimeMillis()
+
+            transactionDao.insertExpense(transaction)
+            recurrence.nextRun =
+                transaction.date + Constants.transactionFrequencyToMillis[transaction.frequency]!!
+
+            recurringTransactionsDao.insertRecurringTransaction(recurrence)
+        }
     }
 
 }

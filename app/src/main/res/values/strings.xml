@@ -86,4 +86,5 @@
     <string name="text_enter_search">enter search</string>
     <string name="text_update_expense">update expense</string>
     <string name="text_delete_expense">delete expense</string>
+    <string name="text_splash_screen_logo">splash_screen_logo</string>
 </resources>

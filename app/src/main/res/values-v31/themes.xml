@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.Finance" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_500</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorAccent">@color/blue_500</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/surface</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/lightNavEnabled</item>
+        <item name="android:navigationBarColor" tools:targetApi="o">@color/surface</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">@bool/lightNavEnabled
+        </item>
+        <item name="android:splashScreenTheme">@id/none</item>
+        <item name="actionBarStyle">@style/Theme.Material3.DayNight.NoActionBar</item>
+    </style>
+</resources>

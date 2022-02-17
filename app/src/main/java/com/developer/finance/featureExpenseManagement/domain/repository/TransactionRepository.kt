@@ -10,6 +10,7 @@ interface TransactionRepository {
     suspend fun deleteAllExpenses()
     suspend fun getCategoryExpense(category: String): List<Transaction>
     suspend fun getExpenseById(id: Int): Transaction?
+    suspend fun testFunctionForService()
 
     fun getAllExpensesFlow(transactionType: String): Flow<List<Transaction>>
     suspend fun getQueryExpenses(search: String): List<Transaction>

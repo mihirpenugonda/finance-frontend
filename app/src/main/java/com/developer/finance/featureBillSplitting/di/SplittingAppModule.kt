@@ -6,6 +6,11 @@ import android.util.Log
 import com.developer.finance.featureBillSplitting.data.remote.UserApiRepository
 import com.developer.finance.featureBillSplitting.data.remote.interfaces.UserApi
 import com.developer.finance.featureBillSplitting.domain.repository.UserApiRepositoryImpl
+import com.developer.finance.featureBillSplitting.domain.usecases.UserUsecases
+import com.developer.finance.featureBillSplitting.domain.usecases.users.GetAllUsersUsecase
+import com.developer.finance.featureBillSplitting.domain.usecases.users.GetUserByIdUsecase
+import com.developer.finance.featureBillSplitting.domain.usecases.users.LoginUsecase
+import com.developer.finance.featureBillSplitting.domain.usecases.users.RegisterUsecase
 import com.pusher.client.Pusher
 import com.pusher.client.PusherOptions
 import com.pusher.client.connection.ConnectionEventListener
@@ -60,7 +65,7 @@ object BillSplittingAppModule {
     @Singleton
     @Provides
     fun provideUserApiRetrofitInstance(): UserApi {
-        return Retrofit.Builder().baseUrl("http://192.168.0.32:3000/api/users/")
+        return Retrofit.Builder().baseUrl("http://192.168.0.101:3000/api/users/")
             .addConverterFactory(
                 GsonConverterFactory.create()
             ).build().create(UserApi::class.java)
@@ -71,5 +76,20 @@ object BillSplittingAppModule {
     fun provideUserApiRepository(userApi: UserApi): UserApiRepository {
         return UserApiRepositoryImpl(userApi)
     }
+
+    @Singleton
+    @Provides
+    fun provideUserUsecases(
+        userApiRepository: UserApiRepository,
+        sharedPreferences: SharedPreferences
+    ): UserUsecases {
+        return UserUsecases(
+            getAllUsersUsecase = GetAllUsersUsecase(userApiRepository),
+            getUserByIdUsecase = GetUserByIdUsecase(userApiRepository),
+            loginUsecase = LoginUsecase(userApiRepository, sharedPreferences),
+            registerUsecase = RegisterUsecase(userApiRepository, sharedPreferences)
+        )
+    }
+
 
 }

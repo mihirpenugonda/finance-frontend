@@ -2,10 +2,7 @@ package com.developer.finance.featureBillSplitting.data.remote.interfaces
 
 import com.developer.finance.featureBillSplitting.data.remote.dto.LoginRegisterResponseDto
 import com.developer.finance.featureBillSplitting.data.remote.dto.findUserResponse.FindUserResponseDto
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface UserApi {
     @GET("find/?user_id=0")
@@ -16,15 +13,11 @@ interface UserApi {
 
     @POST("register")
     suspend fun registerUser(
-        @Body name: String,
-        @Body username: String,
-        @Body email: String,
-        @Body password: String
+        @Body registerBodyItem: HashMap<String, String>
     ): LoginRegisterResponseDto
 
-    @GET("login")
+    @PUT("login")
     suspend fun loginUser(
-        @Body username: String,
-        @Body password: String
+        @Body loginBodyItem: HashMap<String, String>
     ): LoginRegisterResponseDto
 }

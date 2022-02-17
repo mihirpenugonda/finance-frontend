@@ -2,5 +2,6 @@ package com.developer.finance.featureBillSplitting.data.remote.dto.findUserRespo
 
 data class FindUserResponseDto(
     val success: Boolean,
-    val users: List<UserDto>
+    val users: List<UserDto>?,
+    val error: String
 )

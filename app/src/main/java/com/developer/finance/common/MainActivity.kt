@@ -17,9 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-
     private val expensesViewModel: ExpenseViewModel by viewModels()
-
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+//        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
         expensesViewModel
 

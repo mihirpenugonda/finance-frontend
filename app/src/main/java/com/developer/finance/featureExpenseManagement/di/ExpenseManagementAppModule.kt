@@ -30,7 +30,7 @@ object ExpenseManagementAppModule {
         return Room.databaseBuilder(
             context,
             TransactionDatabase::class.java,
-            "transaction_management11"
+            "transaction_management12"
         ).build()
     }
 }
